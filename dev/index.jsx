@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, Link, hashHistory} from 'react-router';
 
 let mainBar = document.getElementById('main-bar');
 let container = document.getElementById('container');
@@ -39,9 +40,18 @@ var MainBar = React.createClass({
   }
 });
 
+var Test = React.createClass({
+  render: function() {
+    return (
+      <h1>Test route</h1>
+    );
+  }
+});
+
 ReactDOM.render(
-  <div>
-    <MainBar/>
-  </div>,
+  <Router history={hashHistory}>
+    <Route path="/" component={MainBar}/>
+    <Route path="/test" component={Test}/>
+  </Router>,
   mainBar
 );
