@@ -2,10 +2,9 @@ var express = require('express');
 var app = express();
 var path = require('path');
 
-app.use(express.static('public'));
+app.use(express.static('dev'));
 
 app.get('/', function(req, res){
-  console.log('Hello');
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 

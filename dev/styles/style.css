@@ -1,0 +1,19 @@
+.main-bar {
+  height: 100px;
+  width: 100%;
+  padding: 0px;
+  background-color: #3F51B5;
+  WebkitFilter: drop-shadow(0px 0px 5px #666);
+  filter: drop-shadow(0px 0px 5px #666);
+}
+
+.logo {
+  font-family: 'Helvetica';
+  font-size: 48px;
+  font-weight: bold;
+  color: #FFFFFF;
+  padding: 13px;
+  padding-top: 20px;
+  opacity: 0.87;
+  margin: 0px;
+}

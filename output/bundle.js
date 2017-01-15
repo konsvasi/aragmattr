@@ -56,71 +56,18 @@
 
 	var _reactRouter = __webpack_require__(178);
 
+	var _main_bar = __webpack_require__(233);
+
+	var _main_bar2 = _interopRequireDefault(_main_bar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var mainBar = document.getElementById('main-bar');
-	var container = document.getElementById('container');
-
-	var Logo = _react2.default.createClass({
-	  displayName: 'Logo',
-
-	  render: function render() {
-	    var logoStyle = {
-	      fontFamily: "Helvetica",
-	      fontSize: 48,
-	      fontWeight: "bold",
-	      color: "#FFFFFF",
-	      padding: 13,
-	      paddingTop: 20,
-	      opacity: "0.87",
-	      margin: 0
-	    };
-	    return _react2.default.createElement(
-	      'p',
-	      { style: logoStyle },
-	      'Aragmattr'
-	    );
-	  }
-	});
-
-	var MainBar = _react2.default.createClass({
-	  displayName: 'MainBar',
-
-	  render: function render() {
-	    var mainBarStyle = {
-	      height: 100,
-	      width: '100%',
-	      padding: 0,
-	      backgroundColor: "#3F51B5",
-	      WebkitFilter: "drop-shadow(0px 0px 5px #666)",
-	      filter: "drop-shadow(0px 0px 5px #666)"
-	    };
-
-	    return _react2.default.createElement(
-	      'div',
-	      { style: mainBarStyle },
-	      _react2.default.createElement(Logo, null)
-	    );
-	  }
-	});
-
-	var Test = _react2.default.createClass({
-	  displayName: 'Test',
-
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'h1',
-	      null,
-	      'Test route'
-	    );
-	  }
-	});
 
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
-	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: MainBar }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/test', component: Test })
+	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _main_bar2.default })
 	), mainBar);
 
 /***/ },
@@ -26454,6 +26401,62 @@
 	  });
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _logo = __webpack_require__(234);
+
+	var _logo2 = _interopRequireDefault(_logo);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MainBar = function MainBar() {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'main-bar' },
+	    _react2.default.createElement(_logo2.default, null)
+	  );
+	};
+
+	exports.default = MainBar;
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Logo = function Logo() {
+	  return _react2.default.createElement(
+	    "p",
+	    { className: "logo" },
+	    "Aragmattr"
+	  );
+	};
+
+	exports.default = Logo;
 
 /***/ }
 /******/ ]);
