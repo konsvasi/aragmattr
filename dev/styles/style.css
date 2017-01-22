@@ -11,9 +11,19 @@
   font-family: 'Helvetica';
   font-size: 48px;
   font-weight: bold;
-  color: #FFFFFF;
+  color: #FFF;
   padding: 13px;
   padding-top: 20px;
   opacity: 0.87;
   margin: 0px;
+  display: inline-block;
+}
+
+.addButton {
+  float: right;
+  opacity: 0.87;
+  color: #FFF;
+  background-color: #34ef60;
+  margin-top: 35px;
+  margin-right: 15px;
 }

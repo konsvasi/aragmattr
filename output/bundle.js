@@ -26420,13 +26420,18 @@
 
 	var _logo2 = _interopRequireDefault(_logo);
 
+	var _add_button = __webpack_require__(235);
+
+	var _add_button2 = _interopRequireDefault(_add_button);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var MainBar = function MainBar() {
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'main-bar' },
-	    _react2.default.createElement(_logo2.default, null)
+	    _react2.default.createElement(_logo2.default, null),
+	    _react2.default.createElement(_add_button2.default, null)
 	  );
 	};
 
@@ -26457,6 +26462,32 @@
 	};
 
 	exports.default = Logo;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Button = function Button() {
+	  return _react2.default.createElement(
+	    "button",
+	    { className: "addButton btn btn-default", type: "button" },
+	    "'Add'"
+	  );
+	};
+
+	exports.default = Button;
 
 /***/ }
 /******/ ]);
