@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import MainBar from './main_bar';
+import Aragmatikes from './aragmatiki_list';
+import AragmatikiContent from './aragmatiki_content';
 
 class Container extends Component {
   constructor(props) {
@@ -8,7 +10,11 @@ class Container extends Component {
 
   render() {
     return (
-      <MainBar />
+      <div>
+        <MainBar />
+        <Aragmatikes />
+        <AragmatikiContent />
+      </div>
     )
   }
 }

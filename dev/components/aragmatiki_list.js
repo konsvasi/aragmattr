@@ -4,8 +4,9 @@ const Aragmatikes = () => {
   return (
     <div className="aragmatikes">
       <ol>
-        <li>Aragmatiki</li>
-        <li>Treloi aragmatiki<li>
+        <li>Aragmatiki<hr/></li>
+        <li>Treli aragmatiki<hr/></li>
+        <li>Hunters meeting<hr/></li>
       </ol>
     </div>
   )

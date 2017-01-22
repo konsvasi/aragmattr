@@ -26518,6 +26518,14 @@
 
 	var _main_bar2 = _interopRequireDefault(_main_bar);
 
+	var _aragmatiki_list = __webpack_require__(237);
+
+	var _aragmatiki_list2 = _interopRequireDefault(_aragmatiki_list);
+
+	var _aragmatiki_content = __webpack_require__(238);
+
+	var _aragmatiki_content2 = _interopRequireDefault(_aragmatiki_content);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26538,7 +26546,13 @@
 	  _createClass(Container, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_main_bar2.default, null);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_main_bar2.default, null),
+	        _react2.default.createElement(_aragmatiki_list2.default, null),
+	        _react2.default.createElement(_aragmatiki_content2.default, null)
+	      );
 	    }
 	  }]);
 
@@ -26546,6 +26560,116 @@
 	}(_react.Component);
 
 	exports.default = Container;
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Aragmatikes = function Aragmatikes() {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "aragmatikes" },
+	    _react2.default.createElement(
+	      "ol",
+	      null,
+	      _react2.default.createElement(
+	        "li",
+	        null,
+	        "Aragmatiki",
+	        _react2.default.createElement("hr", null)
+	      ),
+	      _react2.default.createElement(
+	        "li",
+	        null,
+	        "Treli aragmatiki",
+	        _react2.default.createElement("hr", null)
+	      ),
+	      _react2.default.createElement(
+	        "li",
+	        null,
+	        "Hunters meeting",
+	        _react2.default.createElement("hr", null)
+	      )
+	    )
+	  );
+	};
+
+	exports.default = Aragmatikes;
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AragmatikiContent = function (_Component) {
+	  _inherits(AragmatikiContent, _Component);
+
+	  function AragmatikiContent(props) {
+	    _classCallCheck(this, AragmatikiContent);
+
+	    return _possibleConstructorReturn(this, (AragmatikiContent.__proto__ || Object.getPrototypeOf(AragmatikiContent)).call(this, props));
+	  }
+
+	  _createClass(AragmatikiContent, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "aragmatikiContent" },
+	        _react2.default.createElement(
+	          "h1",
+	          { className: "content-style", id: "content-title" },
+	          "Name: Aragmatiki"
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          { className: "content-style", id: "content-date" },
+	          "Date: 04/20/17"
+	        ),
+	        _react2.default.createElement(
+	          "h2",
+	          { className: "content-style", id: "content-location" },
+	          "Location: Mpountroumi"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return AragmatikiContent;
+	}(_react.Component);
+
+	exports.default = AragmatikiContent;
 
 /***/ }
 /******/ ]);
