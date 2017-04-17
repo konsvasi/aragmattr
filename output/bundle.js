@@ -29307,7 +29307,7 @@
 
 	var _aragmatiki_list2 = _interopRequireDefault(_aragmatiki_list);
 
-	var _aragmatiki_content = __webpack_require__(274);
+	var _aragmatiki_content = __webpack_require__(277);
 
 	var _aragmatiki_content2 = _interopRequireDefault(_aragmatiki_content);
 
@@ -29364,6 +29364,10 @@
 
 	var _reactRedux = __webpack_require__(241);
 
+	var _index = __webpack_require__(279);
+
+	var _redux = __webpack_require__(248);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29372,20 +29376,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	// const Aragmatikes = () => {
-	//   return (
-	//     <div className="aragmatikes">
-	//       <ol>
-	//         // <li>Aragmatiki<hr/></li>
-	//         // <li>Treli aragmatiki<hr/></li>
-	//         // <li>Hunters meeting<hr/></li>
-	//       {this.props.aragmatikes}
-	//       </ol>
-	//     </div>
-	//   )
-	// }
-	//
-	// export default Aragmatikes;
 	var Aragmatikes = function (_Component) {
 	  _inherits(Aragmatikes, _Component);
 
@@ -29398,11 +29388,16 @@
 	  _createClass(Aragmatikes, [{
 	    key: 'renderList',
 	    value: function renderList() {
+	      var _this2 = this;
+
 	      return this.props.aragmatikes.map(function (aragmatiki) {
 	        return _react2.default.createElement(
 	          'li',
-	          {
-	            key: aragmatiki.name },
+	          { className: 'list-group-item',
+	            key: aragmatiki.name,
+	            onClick: function onClick() {
+	              return _this2.props.selectSession(aragmatiki);
+	            } },
 	          aragmatiki.name
 	        );
 	      });
@@ -29427,13 +29422,61 @@
 	  };
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Aragmatikes);
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ selectSession: _index.selectSession }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Aragmatikes);
 
 /***/ }),
-/* 274 */
+/* 274 */,
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _redux = __webpack_require__(248);
+
+	var _reducer_aragmatikes = __webpack_require__(276);
+
+	var _reducer_aragmatikes2 = _interopRequireDefault(_reducer_aragmatikes);
+
+	var _reducer_active_session = __webpack_require__(278);
+
+	var _reducer_active_session2 = _interopRequireDefault(_reducer_active_session);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var rootReducer = (0, _redux.combineReducers)({
+	  aragmatikes: _reducer_aragmatikes2.default,
+	  activeSession: _reducer_active_session2.default
+	});
+
+	exports.default = rootReducer;
+
+/***/ }),
+/* 276 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  return [{ name: 'Aragmatiki', location: 'Mpountroumi' }, { name: 'Best aragmatiki', location: 'Mpountroumi' }, { name: 'Movie night', location: 'Mpountroumi' }];
+	};
+
+/***/ }),
+/* 277 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29444,6 +29487,8 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(241);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29463,25 +29508,34 @@
 	  }
 
 	  _createClass(AragmatikiContent, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
+	      if (!this.props.aragmatiki) {
+	        return _react2.default.createElement(
+	          'div',
+	          { className: 'aragmatikiContent' },
+	          _react2.default.createElement(
+	            'h2',
+	            { className: 'content-style' },
+	            'Select a session'
+	          )
+	        );
+	      }
+
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "aragmatikiContent" },
+	        'div',
+	        { className: 'aragmatikiContent' },
 	        _react2.default.createElement(
-	          "h1",
-	          { className: "content-style", id: "content-title" },
-	          "Name: Aragmatiki"
+	          'h1',
+	          { className: 'content-style' },
+	          'Name:',
+	          this.props.aragmatiki.name
 	        ),
 	        _react2.default.createElement(
-	          "h2",
-	          { className: "content-style", id: "content-date" },
-	          "Date: 04/20/17"
-	        ),
-	        _react2.default.createElement(
-	          "h2",
-	          { className: "content-style", id: "content-location" },
-	          "Location: Mpountroumi"
+	          'h2',
+	          { className: 'content-style' },
+	          'Location:',
+	          this.props.aragmatiki.location
 	        )
 	      );
 	    }
@@ -29490,34 +29544,16 @@
 	  return AragmatikiContent;
 	}(_react.Component);
 
-	exports.default = AragmatikiContent;
+	function mapStateToProps(state) {
+	  return {
+	    aragmatiki: state.activeSession
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(AragmatikiContent);
 
 /***/ }),
-/* 275 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _redux = __webpack_require__(248);
-
-	var _reducer_aragmatikes = __webpack_require__(276);
-
-	var _reducer_aragmatikes2 = _interopRequireDefault(_reducer_aragmatikes);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var rootReducer = (0, _redux.combineReducers)({
-	  aragmatikes: _reducer_aragmatikes2.default
-	});
-
-	exports.default = rootReducer;
-
-/***/ }),
-/* 276 */
+/* 278 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -29527,8 +29563,34 @@
 	});
 
 	exports.default = function () {
-	  return [{ name: 'Aragmatiki', location: 'Mpountroumi' }, { name: 'Best aragmatiki', location: 'Mpountroumi' }, { name: 'Movie night', location: 'Mpountroumi' }];
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	  var action = arguments[1];
+
+	  console.log('click', state, action);
+	  switch (action.type) {
+	    case 'SESSION_SELECTED':
+	      return action.payLoad;
+	  }
+
+	  return state;
 	};
+
+/***/ }),
+/* 279 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.selectSession = selectSession;
+	function selectSession(aragmatiki) {
+	  return {
+	    type: 'SESSION_SELECTED',
+	    payLoad: aragmatiki
+	  };
+	}
 
 /***/ })
 /******/ ]);
