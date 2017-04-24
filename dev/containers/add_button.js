@@ -20,12 +20,32 @@ class Button extends Component {
     super(props);
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      sessionName: '',
+      sessionLocation: '',
+      sessionDate: ''
     }
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
+    this.onNameChange = (event) => {
+      this.setState({sessionName: event.target.value});
+    }
+
+    this.onLocationChange = (event) => {
+      this.setState({sessionLocation: event.target.value});
+    }
+
+    this.onFormSubmit = (event) => {
+      event.preventDefault();
+
+      this.setState({sessionName: '',
+                    sessionLocation: ''});
+
+      console.log('submitted!!!');
+    }
   }
 
   openModal() {
@@ -53,13 +73,21 @@ class Button extends Component {
           contentLabel="Info for new session"
         >
           <h2 ref={subtitle => this.subtitle = subtitle}>Create a new session</h2>
-          //TODO onFormSubmit create new session with values
-          <form className="input-group">
+          <form onSubmit={this.onFormSubmit} className="input-group">
             <input
-              placeholder="Name"
+              placeholder="Give your aragmatiki a name"
               className="form-control"
-              value={this.state.term}
+              value={this.state.sessionName}
+              onChange={this.onNameChange}
+              required
             />
+          <input
+            placeholder="Where is it taking place?"
+            className="form-control"
+            value={this.state.sessionLocation}
+            onChange={this.onLocationChange}
+            required
+          />
               <button type="submit" className="btn btn-secondary">Submit</button>
           </form>
         </Modal>
