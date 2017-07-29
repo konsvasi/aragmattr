@@ -21,9 +21,9 @@ class Button extends Component {
 
     this.state = {
       modalIsOpen: false,
-      sessionName: '',
-      sessionLocation: '',
-      sessionDate: ''
+      name: '',
+      location: '',
+      date: ''
     }
 
     this.openModal = this.openModal.bind(this);
@@ -31,20 +31,19 @@ class Button extends Component {
     this.closeModal = this.closeModal.bind(this);
 
     this.onNameChange = (event) => {
-      this.setState({sessionName: event.target.value});
+      this.setState({name: event.target.value});
     }
 
     this.onLocationChange = (event) => {
-      this.setState({sessionLocation: event.target.value});
+      this.setState({location: event.target.value});
     }
 
     this.onFormSubmit = (event) => {
       event.preventDefault();
 
-      this.setState({sessionName: '',
-                    sessionLocation: ''});
-
-      console.log('submitted!!!');
+      this.setState({modalIsOpen: false});
+      createSession(this.state.name, this.state.location);
+      console.log('submitted!!!', this.state);
     }
   }
 
@@ -62,7 +61,6 @@ class Button extends Component {
 
   render() {
     return (
-      //<button onClick={()=>this.props.createSession()} className="addButton btn btn-default">+</button>
       <div>
         <button onClick={this.openModal} className="addButton btn btn-default">+</button>
         <Modal
@@ -77,14 +75,14 @@ class Button extends Component {
             <input
               placeholder="Give your aragmatiki a name"
               className="form-control"
-              value={this.state.sessionName}
+              value={this.state.name}
               onChange={this.onNameChange}
               required
             />
           <input
             placeholder="Where is it taking place?"
             className="form-control"
-            value={this.state.sessionLocation}
+            value={this.state.location}
             onChange={this.onLocationChange}
             required
           />
@@ -100,4 +98,11 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({createSession: createSession}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(Button);
+function mapStateToProps(state) {
+  return {
+    name: state.name,
+    location: state.location
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Button);

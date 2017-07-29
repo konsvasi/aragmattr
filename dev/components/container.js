@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MainBar from './main_bar';
 import Aragmatikes from '../containers/aragmatiki_list';
 import AragmatikiContent from '../containers/aragmatiki_content';
+import EmptySession from '../containers/empty_session';
 
 class Container extends Component {
   constructor(props) {

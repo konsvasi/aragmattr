@@ -64,11 +64,11 @@
 
 	var _main_bar2 = _interopRequireDefault(_main_bar);
 
-	var _container = __webpack_require__(284);
+	var _container = __webpack_require__(285);
 
 	var _container2 = _interopRequireDefault(_container);
 
-	var _index = __webpack_require__(287);
+	var _index = __webpack_require__(289);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -29216,6 +29216,10 @@
 
 	var _add_button2 = _interopRequireDefault(_add_button);
 
+	var _second_button = __webpack_require__(284);
+
+	var _second_button2 = _interopRequireDefault(_second_button);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var MainBar = function MainBar() {
@@ -29310,9 +29314,9 @@
 
 	    _this.state = {
 	      modalIsOpen: false,
-	      sessionName: '',
-	      sessionLocation: '',
-	      sessionDate: ''
+	      name: '',
+	      location: '',
+	      date: ''
 	    };
 
 	    _this.openModal = _this.openModal.bind(_this);
@@ -29320,20 +29324,19 @@
 	    _this.closeModal = _this.closeModal.bind(_this);
 
 	    _this.onNameChange = function (event) {
-	      _this.setState({ sessionName: event.target.value });
+	      _this.setState({ name: event.target.value });
 	    };
 
 	    _this.onLocationChange = function (event) {
-	      _this.setState({ sessionLocation: event.target.value });
+	      _this.setState({ location: event.target.value });
 	    };
 
 	    _this.onFormSubmit = function (event) {
 	      event.preventDefault();
 
-	      _this.setState({ sessionName: '',
-	        sessionLocation: '' });
-
-	      console.log('submitted!!!');
+	      _this.setState({ modalIsOpen: false });
+	      (0, _index.createSession)(_this.state.name, _this.state.location);
+	      console.log('submitted!!!', _this.state);
 	    };
 	    return _this;
 	  }
@@ -29358,54 +29361,51 @@
 	    value: function render() {
 	      var _this2 = this;
 
-	      return (
-	        //<button onClick={()=>this.props.createSession()} className="addButton btn btn-default">+</button>
+	      return _react2.default.createElement(
+	        'div',
+	        null,
 	        _react2.default.createElement(
-	          'div',
-	          null,
+	          'button',
+	          { onClick: this.openModal, className: 'addButton btn btn-default' },
+	          '+'
+	        ),
+	        _react2.default.createElement(
+	          _reactModal2.default,
+	          {
+	            isOpen: this.state.modalIsOpen,
+	            onAfterOpen: this.afterOpenModal,
+	            style: customStyles,
+	            onRequestClose: this.closeModal,
+	            contentLabel: 'Info for new session'
+	          },
 	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.openModal, className: 'addButton btn btn-default' },
-	            '+'
+	            'h2',
+	            { ref: function ref(subtitle) {
+	                return _this2.subtitle = subtitle;
+	              } },
+	            'Create a new session'
 	          ),
 	          _react2.default.createElement(
-	            _reactModal2.default,
-	            {
-	              isOpen: this.state.modalIsOpen,
-	              onAfterOpen: this.afterOpenModal,
-	              style: customStyles,
-	              onRequestClose: this.closeModal,
-	              contentLabel: 'Info for new session'
-	            },
+	            'form',
+	            { onSubmit: this.onFormSubmit, className: 'input-group' },
+	            _react2.default.createElement('input', {
+	              placeholder: 'Give your aragmatiki a name',
+	              className: 'form-control',
+	              value: this.state.name,
+	              onChange: this.onNameChange,
+	              required: true
+	            }),
+	            _react2.default.createElement('input', {
+	              placeholder: 'Where is it taking place?',
+	              className: 'form-control',
+	              value: this.state.location,
+	              onChange: this.onLocationChange,
+	              required: true
+	            }),
 	            _react2.default.createElement(
-	              'h2',
-	              { ref: function ref(subtitle) {
-	                  return _this2.subtitle = subtitle;
-	                } },
-	              'Create a new session'
-	            ),
-	            _react2.default.createElement(
-	              'form',
-	              { onSubmit: this.onFormSubmit, className: 'input-group' },
-	              _react2.default.createElement('input', {
-	                placeholder: 'Give your aragmatiki a name',
-	                className: 'form-control',
-	                value: this.state.sessionName,
-	                onChange: this.onNameChange,
-	                required: true
-	              }),
-	              _react2.default.createElement('input', {
-	                placeholder: 'Where is it taking place?',
-	                className: 'form-control',
-	                value: this.state.sessionLocation,
-	                onChange: this.onLocationChange,
-	                required: true
-	              }),
-	              _react2.default.createElement(
-	                'button',
-	                { type: 'submit', className: 'btn btn-secondary' },
-	                'Submit'
-	              )
+	              'button',
+	              { type: 'submit', className: 'btn btn-secondary' },
+	              'Submit'
 	            )
 	          )
 	        )
@@ -29420,7 +29420,14 @@
 	  return (0, _redux.bindActionCreators)({ createSession: _index.createSession }, dispatch);
 	}
 
-	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Button);
+	function mapStateToProps(state) {
+	  return {
+	    name: state.name,
+	    location: state.location
+	  };
+	}
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Button);
 
 /***/ }),
 /* 272 */
@@ -29440,11 +29447,11 @@
 	  };
 	}
 
-	function createSession() {
-	  console.log('CREATING SESSION');
+	function createSession(name, location) {
+	  console.log('AM I HERE?');
 	  return {
 	    type: 'CREATE_SESSION',
-	    payload: { name: '', location: '' }
+	    payload: { name: name, location: location }
 	  };
 	}
 
@@ -30838,17 +30845,90 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _index = __webpack_require__(272);
+
+	var _reactRedux = __webpack_require__(241);
+
+	var _redux = __webpack_require__(248);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NewButton = function (_Component) {
+	  _inherits(NewButton, _Component);
+
+	  function NewButton(props) {
+	    _classCallCheck(this, NewButton);
+
+	    var _this = _possibleConstructorReturn(this, (NewButton.__proto__ || Object.getPrototypeOf(NewButton)).call(this, props));
+
+	    _this.state = {
+	      create: false
+	    };
+
+	    _this.openEmptySession = function (event) {
+	      console.log('state:', _this.state);
+	      _this.setState({ create: true });
+	    };
+	    return _this;
+	  }
+
+	  _createClass(NewButton, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.openEmptySession, className: 'addButton btn btn-default' },
+	          '+'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return NewButton;
+	}(_react.Component);
+
+	exports.default = NewButton;
+
+/***/ }),
+/* 285 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _main_bar = __webpack_require__(269);
 
 	var _main_bar2 = _interopRequireDefault(_main_bar);
 
-	var _aragmatiki_list = __webpack_require__(285);
+	var _aragmatiki_list = __webpack_require__(286);
 
 	var _aragmatiki_list2 = _interopRequireDefault(_aragmatiki_list);
 
-	var _aragmatiki_content = __webpack_require__(286);
+	var _aragmatiki_content = __webpack_require__(287);
 
 	var _aragmatiki_content2 = _interopRequireDefault(_aragmatiki_content);
+
+	var _empty_session = __webpack_require__(288);
+
+	var _empty_session2 = _interopRequireDefault(_empty_session);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30886,7 +30966,7 @@
 	exports.default = Container;
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30930,6 +31010,7 @@
 	      var _this2 = this;
 
 	      return this.props.aragmatikes.map(function (aragmatiki) {
+	        console.log('Aragmatiki:', aragmatiki);
 	        return _react2.default.createElement(
 	          'li',
 	          { className: 'list-group-item',
@@ -30968,7 +31049,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Aragmatikes);
 
 /***/ }),
-/* 286 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31048,7 +31129,71 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(AragmatikiContent);
 
 /***/ }),
-/* 287 */
+/* 288 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EmptySession = function (_Component) {
+	  _inherits(EmptySession, _Component);
+
+	  function EmptySession(props) {
+	    _classCallCheck(this, EmptySession);
+
+	    return _possibleConstructorReturn(this, (EmptySession.__proto__ || Object.getPrototypeOf(EmptySession)).call(this, props));
+	  }
+
+	  _createClass(EmptySession, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "emptySession" },
+	        _react2.default.createElement(
+	          "h1",
+	          null,
+	          "Create new session"
+	        ),
+	        _react2.default.createElement(
+	          "form",
+	          null,
+	          _react2.default.createElement(
+	            "label",
+	            null,
+	            "Name:",
+	            _react2.default.createElement("input", { type: "text", name: "name" })
+	          ),
+	          _react2.default.createElement("input", { type: "submit", value: "Submit" })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return EmptySession;
+	}(_react.Component);
+
+	exports.default = EmptySession;
+
+/***/ }),
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31059,15 +31204,15 @@
 
 	var _redux = __webpack_require__(248);
 
-	var _reducer_aragmatikes = __webpack_require__(288);
+	var _reducer_aragmatikes = __webpack_require__(290);
 
 	var _reducer_aragmatikes2 = _interopRequireDefault(_reducer_aragmatikes);
 
-	var _reducer_active_session = __webpack_require__(289);
+	var _reducer_active_session = __webpack_require__(291);
 
 	var _reducer_active_session2 = _interopRequireDefault(_reducer_active_session);
 
-	var _reducer_newSession = __webpack_require__(290);
+	var _reducer_newSession = __webpack_require__(292);
 
 	var _reducer_newSession2 = _interopRequireDefault(_reducer_newSession);
 
@@ -31082,7 +31227,7 @@
 	exports.default = rootReducer;
 
 /***/ }),
-/* 288 */
+/* 290 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -31096,7 +31241,7 @@
 	};
 
 /***/ }),
-/* 289 */
+/* 291 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -31111,6 +31256,7 @@
 
 	  switch (action.type) {
 	    case 'SESSION_SELECTED':
+	      console.log('action.payload', action.payLoad);
 	      return action.payLoad;
 	  }
 
@@ -31118,7 +31264,7 @@
 	};
 
 /***/ }),
-/* 290 */
+/* 292 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -31133,11 +31279,11 @@
 
 	  switch (action.type) {
 	    case 'CREATE_SESSION':
-	      console.log('state', state);
+	      console.log('create session state', state);
 	      return [{ name: action.payload.name, location: action.payload.location }].concat(_toConsumableArray(state));
+	    default:
+	      return state;
 	  }
-
-	  return state;
 	};
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }

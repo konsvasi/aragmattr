@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 class Aragmatikes extends Component {
   renderList() {
     return this.props.aragmatikes.map((aragmatiki) => {
+      console.log('Aragmatiki:', aragmatiki);
       return (
           <li className="list-group-item"
             key={aragmatiki.name}

@@ -5,10 +5,10 @@ export function selectSession(aragmatiki) {
   }
 }
 
-export function createSession() {
-  console.log('CREATING SESSION');
+export function createSession(name, location) {
+  console.log('AM I HERE?');
   return {
     type: 'CREATE_SESSION',
-    payload: {name: '', location: ''}
+    payload: {name: name, location: location}
   }
 }
