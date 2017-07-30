@@ -4,3 +4,10 @@ export function selectSession(aragmatiki) {
     payLoad: aragmatiki
   }
 }
+
+export function createEmptySession() {
+  return {
+    type: 'CREATE_SESSION',
+    newSession: true
+  }
+}

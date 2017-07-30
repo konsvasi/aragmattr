@@ -1,7 +1,6 @@
-export default function(){
-  return [
-    {name: 'Aragmatiki', location: 'Mpountroumi'},
-    {name: 'Best aragmatiki', location: 'Mpountroumi'},
-    {name: 'Movie night', location: 'Mpountroumi'}
-  ]
+import initialState from './initialState';
+
+export default function(state = initialState) {
+  console.log('list and state:', state);
+  return state;
 }
