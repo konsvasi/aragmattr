@@ -5,7 +5,7 @@ export function selectSession(aragmatiki) {
   }
 }
 
-export function createEmptySession() {
+export function createSession() {
   return {
     type: 'CREATE_SESSION',
     newSession: true

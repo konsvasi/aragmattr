@@ -25,14 +25,14 @@ class Button extends Component {
     return (
       <div>
         <button className="addButton btn btn-default"
-          onClick={()=> {console.log('CREATING'); this.props.createSession()}}>+</button>
+          onClick={()=> {this.props.createSession()}}>+</button>
       </div>
     )
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({createSession: sessionAction.createEmptySession}, dispatch);
+  return bindActionCreators({createSession: sessionAction.createSession}, dispatch);
 }
 
 function mapStateToProps(state) {

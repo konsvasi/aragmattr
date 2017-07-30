@@ -12,7 +12,6 @@ class MainScreen extends Component {
 
   showContent() {
     console.log('this.props.newSession:', this);
-    debugger;
     if(this.props.newSession) {
       return <EmptySession />
     }

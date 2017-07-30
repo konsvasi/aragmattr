@@ -6,9 +6,9 @@ class AragmatikiContent extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
-    if (!this.props.aragmatiki) {
+    if (!this.props.newSession) {
       return (
         <div className="aragmatikiContent">
               <h2 className="content-style">Select a session</h2>
@@ -27,7 +27,8 @@ class AragmatikiContent extends Component {
 
 function mapStateToProps(state) {
   return {
-    aragmatiki: state.activeSession
+    aragmatiki: state.activeSession,
+    newSession: state.newSession
   }
 }
 

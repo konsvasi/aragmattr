@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux';
 
 class Aragmatikes extends Component {
   renderList() {
-    console.log('this.props2', this.props.aragmatikes.aragmatikes);
-    return this.props.aragmatikes.aragmatikes.map((aragmatiki) => {
+    console.log('this.props2', this.props.sessions.aragmatikes);
+    return this.props.sessions.aragmatikes.map((aragmatiki) => {
       return (
           <li className="list-group-item"
             key={aragmatiki.name}
@@ -27,8 +27,9 @@ class Aragmatikes extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log('mapStateToProps', state);
   return {
-    aragmatikes: state.aragmatikes
+    sessions: state.aragmatikes
   };
 }
 

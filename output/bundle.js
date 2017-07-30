@@ -29325,7 +29325,7 @@
 	          'button',
 	          { className: 'addButton btn btn-default',
 	            onClick: function onClick() {
-	              console.log('CREATING');_this2.props.createSession();
+	              _this2.props.createSession();
 	            } },
 	          '+'
 	        )
@@ -29337,7 +29337,7 @@
 	}(_react.Component);
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ createSession: sessionAction.createEmptySession }, dispatch);
+	  return (0, _redux.bindActionCreators)({ createSession: sessionAction.createSession }, dispatch);
 	}
 
 	function mapStateToProps(state) {
@@ -29359,7 +29359,7 @@
 	  value: true
 	});
 	exports.selectSession = selectSession;
-	exports.createEmptySession = createEmptySession;
+	exports.createSession = createSession;
 	function selectSession(aragmatiki) {
 	  return {
 	    type: 'SESSION_SELECTED',
@@ -29367,7 +29367,7 @@
 	  };
 	}
 
-	function createEmptySession() {
+	function createSession() {
 	  return {
 	    type: 'CREATE_SESSION',
 	    newSession: true
@@ -30859,8 +30859,8 @@
 	    value: function renderList() {
 	      var _this2 = this;
 
-	      console.log('this.props2', this.props.aragmatikes.aragmatikes);
-	      return this.props.aragmatikes.aragmatikes.map(function (aragmatiki) {
+	      console.log('this.props2', this.props.sessions.aragmatikes);
+	      return this.props.sessions.aragmatikes.map(function (aragmatiki) {
 	        return _react2.default.createElement(
 	          'li',
 	          { className: 'list-group-item',
@@ -30887,8 +30887,9 @@
 	}(_react.Component);
 
 	function mapStateToProps(state) {
+	  console.log('mapStateToProps', state);
 	  return {
-	    aragmatikes: state.aragmatikes
+	    sessions: state.aragmatikes
 	  };
 	}
 
@@ -30936,7 +30937,7 @@
 	  _createClass(AragmatikiContent, [{
 	    key: 'render',
 	    value: function render() {
-	      if (!this.props.aragmatiki) {
+	      if (!this.props.newSession) {
 	        return _react2.default.createElement(
 	          'div',
 	          { className: 'aragmatikiContent' },
@@ -30972,7 +30973,8 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    aragmatiki: state.activeSession
+	    aragmatiki: state.activeSession,
+	    newSession: state.newSession
 	  };
 	}
 
@@ -31029,7 +31031,6 @@
 	    key: 'showContent',
 	    value: function showContent() {
 	      console.log('this.props.newSession:', this);
-	      debugger;
 	      if (this.props.newSession) {
 	        return _react2.default.createElement(_empty_session2.default, null);
 	      }
@@ -31182,10 +31183,14 @@
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
 	  var action = arguments[1];
 
-	  console.log('reducer CREATE_SESSION', state, action.type);
+	  // console.log('reducer CREATE_SESSION', state.aragmatikes, action);
 	  switch (action.type) {
 	    case 'CREATE_SESSION':
-	      return state = [].concat(_toConsumableArray(state), [{ name: '', location: '', newSession: action.newSession }]);
+	      var newAragmatiki = { name: 'Test', location: 'TEST' };
+	      var newSessionValue = action.newSession;
+	      var newState = { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes), [newAragmatiki]), newSession: newSessionValue };
+	      console.log('oldState:', state, 'newState:', newState);
+	      return newState;
 	    default:
 	      return state;
 	  }
