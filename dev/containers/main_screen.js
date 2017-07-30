@@ -30,7 +30,8 @@ class MainScreen extends Component {
 
 function mapStateToProps(state) {
   return {
-    newSession: state.newSession
+    //createSession is the name of the reducer
+    newSession: state.createSession.newSession
   };
 }
 

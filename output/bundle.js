@@ -58,6 +58,8 @@
 
 	var _reactRedux = __webpack_require__(241);
 
+	var _redux = __webpack_require__(248);
+
 	var _main_bar = __webpack_require__(269);
 
 	var _main_bar2 = _interopRequireDefault(_main_bar);
@@ -66,11 +68,15 @@
 
 	var _container2 = _interopRequireDefault(_container);
 
-	var _reducers = __webpack_require__(288);
+	var _reducers = __webpack_require__(289);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _configureStore = __webpack_require__(293);
+	var _initialState = __webpack_require__(291);
+
+	var _initialState2 = _interopRequireDefault(_initialState);
+
+	var _configureStore = __webpack_require__(295);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
@@ -79,8 +85,12 @@
 	var mainBar = document.getElementById('main-bar');
 	var container = document.getElementById('container');
 
-	var store = (0, _configureStore2.default)();
+	// const store = configureStore();
+	console.log('rootReducer', _reducers2.default);
 
+	var store = (0, _redux.createStore)(_reducers2.default, _initialState2.default);
+
+	console.log('store:', store.getState());
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
@@ -29271,17 +29281,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _index = __webpack_require__(272);
-
-	var sessionAction = _interopRequireWildcard(_index);
-
 	var _reactRedux = __webpack_require__(241);
 
 	var _redux = __webpack_require__(248);
 
-	var _reactModal = __webpack_require__(273);
+	var _reactModal = __webpack_require__(272);
 
 	var _reactModal2 = _interopRequireDefault(_reactModal);
+
+	var _index = __webpack_require__(283);
+
+	var sessionAction = _interopRequireWildcard(_index);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -29337,7 +29347,11 @@
 	}(_react.Component);
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ createSession: sessionAction.createSession }, dispatch);
+	  return {
+	    createSession: function createSession() {
+	      dispatch({ type: 'CREATE_SESSION', newSession: true });
+	    }
+	  };
 	}
 
 	function mapStateToProps(state) {
@@ -29351,51 +29365,26 @@
 
 /***/ }),
 /* 272 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	module.exports = __webpack_require__(273);
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.selectSession = selectSession;
-	exports.createSession = createSession;
-	function selectSession(aragmatiki) {
-	  return {
-	    type: 'SESSION_SELECTED',
-	    payLoad: aragmatiki
-	  };
-	}
 
-	function createSession() {
-	  return {
-	    type: 'CREATE_SESSION',
-	    newSession: true
-	  };
-	}
 
 /***/ }),
 /* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(274);
-
-
-
-/***/ }),
-/* 274 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	/* WEBPACK VAR INJECTION */(function(process) {var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(36);
 	var PropTypes = __webpack_require__(185);
-	var ExecutionEnvironment = __webpack_require__(275);
-	var ModalPortal = React.createFactory(__webpack_require__(276));
-	var ariaAppHider = __webpack_require__(281);
-	var refCount = __webpack_require__(282);
-	var elementClass = __webpack_require__(283);
+	var ExecutionEnvironment = __webpack_require__(274);
+	var ModalPortal = React.createFactory(__webpack_require__(275));
+	var ariaAppHider = __webpack_require__(280);
+	var refCount = __webpack_require__(281);
+	var elementClass = __webpack_require__(282);
 	var renderSubtreeIntoContainer = __webpack_require__(36).unstable_renderSubtreeIntoContainer;
-	var Assign = __webpack_require__(280);
+	var Assign = __webpack_require__(279);
 	var createReactClass = __webpack_require__(190)
 
 	var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
@@ -29556,7 +29545,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 275 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -29601,14 +29590,14 @@
 
 
 /***/ }),
-/* 276 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
 	var div = React.DOM.div;
-	var focusManager = __webpack_require__(277);
-	var scopeTab = __webpack_require__(279);
-	var Assign = __webpack_require__(280);
+	var focusManager = __webpack_require__(276);
+	var scopeTab = __webpack_require__(278);
+	var Assign = __webpack_require__(279);
 	var createReactClass = __webpack_require__(190);
 
 	// so that our CSS is statically analyzable
@@ -29813,10 +29802,10 @@
 
 
 /***/ }),
-/* 277 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(278);
+	var findTabbable = __webpack_require__(277);
 	var focusLaterElements = [];
 	var modalElement = null;
 	var needToFocus = false;
@@ -29887,7 +29876,7 @@
 
 
 /***/ }),
-/* 278 */
+/* 277 */
 /***/ (function(module, exports) {
 
 	/*!
@@ -29943,10 +29932,10 @@
 
 
 /***/ }),
-/* 279 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(278);
+	var findTabbable = __webpack_require__(277);
 
 	module.exports = function(node, event) {
 	  var tabbable = findTabbable(node);
@@ -29968,7 +29957,7 @@
 
 
 /***/ }),
-/* 280 */
+/* 279 */
 /***/ (function(module, exports) {
 
 	/**
@@ -30611,7 +30600,7 @@
 
 
 /***/ }),
-/* 281 */
+/* 280 */
 /***/ (function(module, exports) {
 
 	var _element = typeof document !== 'undefined' ? document.body : null;
@@ -30659,7 +30648,7 @@
 
 
 /***/ }),
-/* 282 */
+/* 281 */
 /***/ (function(module, exports) {
 
 	var modals = [];
@@ -30684,7 +30673,7 @@
 
 
 /***/ }),
-/* 283 */
+/* 282 */
 /***/ (function(module, exports) {
 
 	module.exports = function(opts) {
@@ -30747,6 +30736,31 @@
 	  else this.add(className)
 	}
 
+
+/***/ }),
+/* 283 */
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.selectSession = selectSession;
+	exports.createSession = createSession;
+	function selectSession(aragmatiki) {
+	  return {
+	    type: 'SESSION_SELECTED',
+	    payLoad: aragmatiki
+	  };
+	}
+
+	function createSession() {
+	  return {
+	    type: 'CREATE_SESSION',
+	    newSession: true
+	  };
+	}
 
 /***/ }),
 /* 284 */
@@ -30833,7 +30847,7 @@
 
 	var _reactRedux = __webpack_require__(241);
 
-	var _index = __webpack_require__(272);
+	var _index = __webpack_require__(283);
 
 	var _redux = __webpack_require__(248);
 
@@ -30859,8 +30873,9 @@
 	    value: function renderList() {
 	      var _this2 = this;
 
-	      console.log('this.props2', this.props.sessions.aragmatikes);
-	      return this.props.sessions.aragmatikes.map(function (aragmatiki) {
+	      console.log('this.props2', this);
+	      // return this.props.sessions.aragmatikes.map((aragmatiki) => {
+	      return [].map(function (aragmatiki) {
 	        return _react2.default.createElement(
 	          'li',
 	          { className: 'list-group-item',
@@ -30889,12 +30904,12 @@
 	function mapStateToProps(state) {
 	  console.log('mapStateToProps', state);
 	  return {
-	    sessions: state.aragmatikes
+	    sessions: state.createSession
 	  };
 	}
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ selectSession: _index.selectSession }, dispatch);
+	  return (0, _redux.bindActionCreators)({ selectSession: _index.selectSession, sessions: _index.createSession }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Aragmatikes);
@@ -31006,7 +31021,7 @@
 
 	var _aragmatiki_content2 = _interopRequireDefault(_aragmatiki_content);
 
-	var _empty_session = __webpack_require__(294);
+	var _empty_session = __webpack_require__(288);
 
 	var _empty_session2 = _interopRequireDefault(_empty_session);
 
@@ -31052,7 +31067,8 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    newSession: state.newSession
+	    //createSession is the name of the reducer
+	    newSession: state.createSession.newSession
 	  };
 	}
 
@@ -31068,33 +31084,141 @@
 	  value: true
 	});
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(241);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EmptySession = function (_Component) {
+	  _inherits(EmptySession, _Component);
+
+	  function EmptySession(props) {
+	    _classCallCheck(this, EmptySession);
+
+	    var _this = _possibleConstructorReturn(this, (EmptySession.__proto__ || Object.getPrototypeOf(EmptySession)).call(this, props));
+
+	    _this.handleNameChange = function (ev) {
+	      console.log('name:', ev.target.value);
+	      // this.setState({name: ev.target.value});
+	      _this.name = ev.target.value;
+	    };
+
+	    _this.handleLocationChange = function (ev) {
+	      console.log('location:', ev.target.value);
+	      // this.setState({location: ev.target.value});
+	      _this.location = ev.target.value;
+	    };
+	    return _this;
+	  }
+
+	  _createClass(EmptySession, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'aragmatikiContent' },
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'name' },
+	              'Name:'
+	            ),
+	            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', onChange: this.handleNameChange })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'label',
+	              { htmlFor: 'location' },
+	              'Location:'
+	            ),
+	            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'location', onChange: this.handleLocationChange })
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { type: 'submit', className: 'btn btn-default', onSubmit: this.props.handleSubmit(this.name, this.location) },
+	            'Submit'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return EmptySession;
+	}(_react.Component);
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    handleSubmit: function handleSubmit(name, location) {
+	      console.log('blalb');
+	      dispatch({
+	        type: 'ADD_SESSION',
+	        payload: { name: name, location: location }
+	      });
+	    }
+	  };
+	};
+
+	exports.default = (0, _reactRedux.connect)(undefined, mapDispatchToProps)(EmptySession);
+
+/***/ }),
+/* 289 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _redux = __webpack_require__(248);
 
-	var _reducer_aragmatikes = __webpack_require__(289);
+	var _reducer_aragmatikes = __webpack_require__(290);
 
 	var _reducer_aragmatikes2 = _interopRequireDefault(_reducer_aragmatikes);
 
-	var _reducer_active_session = __webpack_require__(291);
+	var _reducer_active_session = __webpack_require__(292);
 
 	var _reducer_active_session2 = _interopRequireDefault(_reducer_active_session);
 
-	var _reducer_create_session = __webpack_require__(292);
+	var _reducer_create_session = __webpack_require__(293);
 
 	var _reducer_create_session2 = _interopRequireDefault(_reducer_create_session);
+
+	var _reducer_add_session = __webpack_require__(294);
+
+	var _reducer_add_session2 = _interopRequireDefault(_reducer_add_session);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
 	  aragmatikes: _reducer_aragmatikes2.default,
 	  activeSession: _reducer_active_session2.default,
-	  createSession: _reducer_create_session2.default
-
+	  createSession: _reducer_create_session2.default,
+	  addSession: _reducer_add_session2.default
 	});
 
 	exports.default = rootReducer;
 
 /***/ }),
-/* 289 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31110,14 +31234,14 @@
 	  return state;
 	};
 
-	var _initialState = __webpack_require__(290);
+	var _initialState = __webpack_require__(291);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 290 */
+/* 291 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -31133,7 +31257,7 @@
 	exports.default = initialState;
 
 /***/ }),
-/* 291 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31155,14 +31279,14 @@
 	  return state;
 	};
 
-	var _initialState = __webpack_require__(290);
+	var _initialState = __webpack_require__(291);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 292 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31171,7 +31295,7 @@
 	  value: true
 	});
 
-	var _initialState = __webpack_require__(290);
+	var _initialState = __webpack_require__(291);
 
 	var _initialState2 = _interopRequireDefault(_initialState);
 
@@ -31186,9 +31310,8 @@
 	  // console.log('reducer CREATE_SESSION', state.aragmatikes, action);
 	  switch (action.type) {
 	    case 'CREATE_SESSION':
-	      var newAragmatiki = { name: 'Test', location: 'TEST' };
 	      var newSessionValue = action.newSession;
-	      var newState = { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes), [newAragmatiki]), newSession: newSessionValue };
+	      var newState = { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes)), newSession: newSessionValue };
 	      console.log('oldState:', state, 'newState:', newState);
 	      return newState;
 	    default:
@@ -31197,7 +31320,37 @@
 	};
 
 /***/ }),
-/* 293 */
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _initialState = __webpack_require__(291);
+
+	var _initialState2 = _interopRequireDefault(_initialState);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function () {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
+	  var action = arguments[1];
+
+	  console.log('ADD_SESSION', state, action);
+	  switch (action.type) {
+	    case 'ADD_SESSION':
+	      console.log('state:', state);
+	      return state;
+	    default:
+	      return state;
+	  }
+	};
+
+/***/ }),
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31209,7 +31362,7 @@
 
 	var _redux = __webpack_require__(248);
 
-	var _reducers = __webpack_require__(288);
+	var _reducers = __webpack_require__(289);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -31218,60 +31371,6 @@
 	function configureStore(initialState) {
 	  return (0, _redux.createStore)(_reducers2.default, initialState);
 	}
-
-/***/ }),
-/* 294 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var EmptySession = function (_Component) {
-	  _inherits(EmptySession, _Component);
-
-	  function EmptySession(props) {
-	    _classCallCheck(this, EmptySession);
-
-	    return _possibleConstructorReturn(this, (EmptySession.__proto__ || Object.getPrototypeOf(EmptySession)).call(this, props));
-	  }
-
-	  _createClass(EmptySession, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement(
-	          "form",
-	          null,
-	          _react2.default.createElement("input", { type: "text", name: "name" }),
-	          _react2.default.createElement("input", { type: "text", name: "location" })
-	        )
-	      );
-	    }
-	  }]);
-
-	  return EmptySession;
-	}(_react.Component);
-
-	exports.default = EmptySession;
 
 /***/ })
 /******/ ]);

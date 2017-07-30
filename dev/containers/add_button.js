@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {createSession} from '../actions/index';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Modal from 'react-modal';
@@ -31,8 +30,11 @@ class Button extends Component {
   }
 }
 
+
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({createSession: sessionAction.createSession}, dispatch);
+  return ({
+    createSession: () => {dispatch({type:'CREATE_SESSION', newSession: true })}
+  })
 }
 
 function mapStateToProps(state) {
