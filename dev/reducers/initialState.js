@@ -1,6 +1,5 @@
 const initialState = {
-  aragmatikes: [],
-  newSession: false
+  aragmatikes: []
 }
 
 export default initialState;

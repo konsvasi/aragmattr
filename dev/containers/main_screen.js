@@ -11,7 +11,7 @@ class MainScreen extends Component {
   }
 
   showContent() {
-    console.log('this.props.newSession:', this);
+    //console.log('this.props.newSession:', this);
     if(this.props.newSession) {
       return <EmptySession />
     }
@@ -30,8 +30,8 @@ class MainScreen extends Component {
 
 function mapStateToProps(state) {
   return {
-    //createSession is the name of the reducer
-    newSession: state.createSession.newSession
+    //newSession is the name of the reducer
+    newSession: state.newSession.newSession
   };
 }
 

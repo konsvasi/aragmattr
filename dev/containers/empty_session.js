@@ -6,15 +6,17 @@ class EmptySession extends Component {
     super(props);
 
     this.handleNameChange = (ev) => {
-      console.log('name:', ev.target.value);
-      // this.setState({name: ev.target.value});
+
       this.name = ev.target.value;
     }
 
     this.handleLocationChange = (ev) => {
-      console.log('location:', ev.target.value)
-      // this.setState({location: ev.target.value});
       this.location = ev.target.value;
+    }
+
+    this.handleSubmit = (ev) => {
+      ev.preventDefault();
+      this.props.handleSubmit(this.name, this.location);
     }
   }
 
@@ -30,7 +32,7 @@ class EmptySession extends Component {
             <label htmlFor="location">Location:</label>
             <input type="text" className="form-control" id="location" onChange = {this.handleLocationChange}/>
           </div>
-          <button type="submit" className="btn btn-default" onSubmit= {this.props.handleSubmit(this.name, this.location)}>Submit</button>
+          <button type="submit" className="btn btn-default" onSubmit= {this.handleSubmit}>Submit</button>
         </form>
       </div>
     )
@@ -40,7 +42,6 @@ class EmptySession extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
       handleSubmit: (name, location) => {
-        console.log('blalb');
       dispatch({
         type: 'ADD_SESSION',
         payload: {name: name, location: location}

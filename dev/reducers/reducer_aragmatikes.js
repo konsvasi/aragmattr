@@ -1,6 +1,5 @@
 import initialState from './initialState';
 
-export default function(state = initialState) {
-  console.log('list and state:', state);
+export default function(state = initialState, action) {
   return state;
 }

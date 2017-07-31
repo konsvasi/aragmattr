@@ -1,12 +1,15 @@
 import initialState from './initialState';
 
 export default (state = initialState, action) => {
-  console.log('ADD_SESSION', state, action);
+  debugger;
   switch(action.type) {
     case 'ADD_SESSION':
-      console.log('state:', state);
-      return state;
+      const newState = Object.assign({}, state, { aragmatikes: [...state.aragmatikes,
+        {name: action.payload.name, location: action.payload.location}]});
+      return newState;
     default:
       return state;
   }
+
+  return state;
 }

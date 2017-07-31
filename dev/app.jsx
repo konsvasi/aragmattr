@@ -14,12 +14,11 @@ import configureStore from './store/configureStore';
 let mainBar = document.getElementById('main-bar');
 let container = document.getElementById('container');
 
-// const store = configureStore();
-console.log('rootReducer', rootReducer);
+// const store = createStore(rootReducer, initialState);
+const store = createStore(
+  rootReducer, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
-const store = createStore(rootReducer, initialState);
-
-console.log('store:', store.getState());
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>

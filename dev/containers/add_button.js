@@ -33,15 +33,8 @@ class Button extends Component {
 
 function mapDispatchToProps(dispatch) {
   return ({
-    createSession: () => {dispatch({type:'CREATE_SESSION', newSession: true })}
+    createSession: () => {dispatch({type:'CREATE_SESSION', payload: {newSession: true}})}
   })
 }
 
-function mapStateToProps(state) {
-  return {
-    name: state.name,
-    location: state.location
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Button);
+export default connect(undefined, mapDispatchToProps)(Button);

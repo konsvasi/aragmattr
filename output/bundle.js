@@ -85,12 +85,9 @@
 	var mainBar = document.getElementById('main-bar');
 	var container = document.getElementById('container');
 
-	// const store = configureStore();
-	console.log('rootReducer', _reducers2.default);
+	// const store = createStore(rootReducer, initialState);
+	var store = (0, _redux.createStore)(_reducers2.default, _initialState2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-	var store = (0, _redux.createStore)(_reducers2.default, _initialState2.default);
-
-	console.log('store:', store.getState());
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
@@ -29349,19 +29346,12 @@
 	function mapDispatchToProps(dispatch) {
 	  return {
 	    createSession: function createSession() {
-	      dispatch({ type: 'CREATE_SESSION', newSession: true });
+	      dispatch({ type: 'CREATE_SESSION', payload: { newSession: true } });
 	    }
 	  };
 	}
 
-	function mapStateToProps(state) {
-	  return {
-	    name: state.name,
-	    location: state.location
-	  };
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Button);
+	exports.default = (0, _reactRedux.connect)(undefined, mapDispatchToProps)(Button);
 
 /***/ }),
 /* 272 */
@@ -30751,14 +30741,16 @@
 	function selectSession(aragmatiki) {
 	  return {
 	    type: 'SESSION_SELECTED',
-	    payLoad: aragmatiki
+	    payLoad: { aragmatikes: aragmatiki, newSession: false }
 	  };
 	}
 
 	function createSession() {
 	  return {
 	    type: 'CREATE_SESSION',
-	    newSession: true
+	    payload: {
+	      newSession: true
+	    }
 	  };
 	}
 
@@ -30873,9 +30865,7 @@
 	    value: function renderList() {
 	      var _this2 = this;
 
-	      console.log('this.props2', this);
-	      // return this.props.sessions.aragmatikes.map((aragmatiki) => {
-	      return [].map(function (aragmatiki) {
+	      return this.props.sessions.aragmatikes.map(function (aragmatiki) {
 	        return _react2.default.createElement(
 	          'li',
 	          { className: 'list-group-item',
@@ -30902,14 +30892,27 @@
 	}(_react.Component);
 
 	function mapStateToProps(state) {
-	  console.log('mapStateToProps', state);
 	  return {
-	    sessions: state.createSession
+	    sessions: state.addSession
 	  };
 	}
 
+	// function mapDispatchToProps(dispatch) {
+	//   return bindActionCreators({selectSession: selectSession, sessions: addSession}, dispatch);
+	// }
+
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ selectSession: _index.selectSession, sessions: _index.createSession }, dispatch);
+	  return {
+	    selectSession: function selectSession(session) {
+	      dispatch({
+	        type: 'SESSION_SELECTED',
+	        payload: {
+	          aragmatiki: session,
+	          newSession: false
+	        }
+	      });
+	    }
+	  };
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Aragmatikes);
@@ -30952,6 +30955,7 @@
 	  _createClass(AragmatikiContent, [{
 	    key: 'render',
 	    value: function render() {
+	      console.log('RENDER:', this.props);
 	      if (!this.props.newSession) {
 	        return _react2.default.createElement(
 	          'div',
@@ -31045,7 +31049,7 @@
 	  _createClass(MainScreen, [{
 	    key: 'showContent',
 	    value: function showContent() {
-	      console.log('this.props.newSession:', this);
+	      //console.log('this.props.newSession:', this);
 	      if (this.props.newSession) {
 	        return _react2.default.createElement(_empty_session2.default, null);
 	      }
@@ -31067,8 +31071,8 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    //createSession is the name of the reducer
-	    newSession: state.createSession.newSession
+	    //newSession is the name of the reducer
+	    newSession: state.newSession.newSession
 	  };
 	}
 
@@ -31109,15 +31113,17 @@
 	    var _this = _possibleConstructorReturn(this, (EmptySession.__proto__ || Object.getPrototypeOf(EmptySession)).call(this, props));
 
 	    _this.handleNameChange = function (ev) {
-	      console.log('name:', ev.target.value);
-	      // this.setState({name: ev.target.value});
+
 	      _this.name = ev.target.value;
 	    };
 
 	    _this.handleLocationChange = function (ev) {
-	      console.log('location:', ev.target.value);
-	      // this.setState({location: ev.target.value});
 	      _this.location = ev.target.value;
+	    };
+
+	    _this.handleSubmit = function (ev) {
+	      ev.preventDefault();
+	      _this.props.handleSubmit(_this.name, _this.location);
 	    };
 	    return _this;
 	  }
@@ -31153,7 +31159,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'button',
-	            { type: 'submit', className: 'btn btn-default', onSubmit: this.props.handleSubmit(this.name, this.location) },
+	            { type: 'submit', className: 'btn btn-default', onSubmit: this.handleSubmit },
 	            'Submit'
 	          )
 	        )
@@ -31167,7 +31173,6 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 	    handleSubmit: function handleSubmit(name, location) {
-	      console.log('blalb');
 	      dispatch({
 	        type: 'ADD_SESSION',
 	        payload: { name: name, location: location }
@@ -31211,7 +31216,7 @@
 	var rootReducer = (0, _redux.combineReducers)({
 	  aragmatikes: _reducer_aragmatikes2.default,
 	  activeSession: _reducer_active_session2.default,
-	  createSession: _reducer_create_session2.default,
+	  newSession: _reducer_create_session2.default,
 	  addSession: _reducer_add_session2.default
 	});
 
@@ -31229,8 +31234,8 @@
 
 	exports.default = function () {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
+	  var action = arguments[1];
 
-	  console.log('list and state:', state);
 	  return state;
 	};
 
@@ -31250,8 +31255,7 @@
 	  value: true
 	});
 	var initialState = {
-	  aragmatikes: [],
-	  newSession: false
+	  aragmatikes: []
 	};
 
 	exports.default = initialState;
@@ -31270,13 +31274,14 @@
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
 	  var action = arguments[1];
 
-	  console.log('click', state, action);
+	  console.log('SESSION_SELECTED', state, action);
 	  switch (action.type) {
 	    case 'SESSION_SELECTED':
-	      return action.payLoad;
+	      var newState = Object.assign({}, state, { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes)), newSession: action.payload.newSession });
+	      return newState;
+	    default:
+	      return state;
 	  }
-
-	  return state;
 	};
 
 	var _initialState = __webpack_require__(291);
@@ -31284,6 +31289,8 @@
 	var _initialState2 = _interopRequireDefault(_initialState);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /***/ }),
 /* 293 */
@@ -31307,12 +31314,10 @@
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
 	  var action = arguments[1];
 
-	  // console.log('reducer CREATE_SESSION', state.aragmatikes, action);
 	  switch (action.type) {
 	    case 'CREATE_SESSION':
-	      var newSessionValue = action.newSession;
+	      var newSessionValue = action.payload.newSession;
 	      var newState = { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes)), newSession: newSessionValue };
-	      console.log('oldState:', state, 'newState:', newState);
 	      return newState;
 	    default:
 	      return state;
@@ -31335,18 +31340,22 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 	exports.default = function () {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
 	  var action = arguments[1];
 
-	  console.log('ADD_SESSION', state, action);
+	  debugger;
 	  switch (action.type) {
 	    case 'ADD_SESSION':
-	      console.log('state:', state);
-	      return state;
+	      var newState = Object.assign({}, state, { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes), [{ name: action.payload.name, location: action.payload.location }]) });
+	      return newState;
 	    default:
 	      return state;
 	  }
+
+	  return state;
 	};
 
 /***/ }),

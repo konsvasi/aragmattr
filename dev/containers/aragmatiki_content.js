@@ -8,6 +8,7 @@ class AragmatikiContent extends Component {
   }
 
   render() {
+    console.log('RENDER:', this.props);
     if (!this.props.newSession) {
       return (
         <div className="aragmatikiContent">

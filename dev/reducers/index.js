@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
-import Aragmatikes from './reducer_aragmatikes';
-import ActiveSession from './reducer_active_session';
-import EmptySession from './reducer_create_session';
-import AddSession from './reducer_add_session';
+import AragmatikesReducer from './reducer_aragmatikes';
+import ActiveSessionReducer from './reducer_active_session';
+import CreateSessionReducer from './reducer_create_session';
+import AddSessionReducer from './reducer_add_session';
 
 const rootReducer = combineReducers({
-  aragmatikes: Aragmatikes,
-  activeSession: ActiveSession,
-  createSession: EmptySession,
-  addSession: AddSession
+  aragmatikes: AragmatikesReducer,
+  activeSession: ActiveSessionReducer,
+  newSession: CreateSessionReducer,
+  addSession: AddSessionReducer
 });
 
 export default rootReducer;
