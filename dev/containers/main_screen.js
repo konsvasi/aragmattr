@@ -11,8 +11,10 @@ class MainScreen extends Component {
   }
 
   showContent() {
-    //console.log('this.props.newSession:', this);
-    if(this.props.newSession) {
+    console.log('this.props.newSession:', this.props);
+    debugger;
+
+    if(this.props.addSession) {
       return <EmptySession />
     }
     return <AragmatikiContent />
@@ -27,12 +29,11 @@ class MainScreen extends Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
-    //newSession is the name of the reducer
-    newSession: state.newSession.newSession
-  };
+    openEmptySession: state.newSession,
+    addSession: state.addSession.newSession
+  }
 }
 
-export default connect(mapStateToProps)(MainScreen);
+export default connect(mapStateToProps, null)(MainScreen);

@@ -31,9 +31,15 @@ class Button extends Component {
 }
 
 
+// function mapDispatchToProps(dispatch) {
+//   return ({
+//     createSession: () => {dispatch({type:'CREATE_SESSION', payload: {newSession: true}})}
+//   })
+// }
+
 function mapDispatchToProps(dispatch) {
   return ({
-    createSession: () => {dispatch({type:'CREATE_SESSION', payload: {newSession: true}})}
+    createSession: () => {dispatch({type:'ADD_SESSION', payload: {newSession: true}})}
   })
 }
 

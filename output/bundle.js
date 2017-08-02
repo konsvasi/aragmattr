@@ -29343,10 +29343,16 @@
 	  return Button;
 	}(_react.Component);
 
+	// function mapDispatchToProps(dispatch) {
+	//   return ({
+	//     createSession: () => {dispatch({type:'CREATE_SESSION', payload: {newSession: true}})}
+	//   })
+	// }
+
 	function mapDispatchToProps(dispatch) {
 	  return {
 	    createSession: function createSession() {
-	      dispatch({ type: 'CREATE_SESSION', payload: { newSession: true } });
+	      dispatch({ type: 'ADD_SESSION', payload: { newSession: true } });
 	    }
 	  };
 	}
@@ -30865,13 +30871,13 @@
 	    value: function renderList() {
 	      var _this2 = this;
 
-	      return this.props.sessions.aragmatikes.map(function (aragmatiki) {
+	      return this.props.aragmatikes.map(function (aragmatiki) {
 	        return _react2.default.createElement(
 	          'li',
 	          { className: 'list-group-item',
 	            key: aragmatiki.name,
 	            onClick: function onClick() {
-	              return _this2.props.selectSession(aragmatiki);
+	              _this2.props.selectSession(aragmatiki);
 	            } },
 	          aragmatiki.name
 	        );
@@ -30893,13 +30899,9 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    sessions: state.addSession
+	    aragmatikes: state.addSession.aragmatikes
 	  };
 	}
-
-	// function mapDispatchToProps(dispatch) {
-	//   return bindActionCreators({selectSession: selectSession, sessions: addSession}, dispatch);
-	// }
 
 	function mapDispatchToProps(dispatch) {
 	  return {
@@ -30955,15 +30957,14 @@
 	  _createClass(AragmatikiContent, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log('RENDER:', this.props);
-	      if (!this.props.newSession) {
+	      if (this.props.aragmatikes.length == 0) {
 	        return _react2.default.createElement(
 	          'div',
 	          { className: 'aragmatikiContent' },
 	          _react2.default.createElement(
 	            'h2',
 	            { className: 'content-style' },
-	            'Select a session'
+	            'Create a session'
 	          )
 	        );
 	      }
@@ -30975,13 +30976,13 @@
 	          'h1',
 	          { className: 'content-style' },
 	          'Name:',
-	          this.props.aragmatiki.name
+	          this.props.aragmatikes[0].name
 	        ),
 	        _react2.default.createElement(
 	          'h2',
 	          { className: 'content-style' },
 	          'Location:',
-	          this.props.aragmatiki.location
+	          this.props.aragmatikes[0].location
 	        )
 	      );
 	    }
@@ -30993,7 +30994,7 @@
 	function mapStateToProps(state) {
 	  return {
 	    aragmatiki: state.activeSession,
-	    newSession: state.newSession
+	    aragmatikes: state.addSession.aragmatikes
 	  };
 	}
 
@@ -31049,8 +31050,10 @@
 	  _createClass(MainScreen, [{
 	    key: 'showContent',
 	    value: function showContent() {
-	      //console.log('this.props.newSession:', this);
-	      if (this.props.newSession) {
+	      console.log('this.props.newSession:', this.props);
+	      debugger;
+
+	      if (this.props.addSession) {
 	        return _react2.default.createElement(_empty_session2.default, null);
 	      }
 	      return _react2.default.createElement(_aragmatiki_content2.default, null);
@@ -31071,12 +31074,12 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    //newSession is the name of the reducer
-	    newSession: state.newSession.newSession
+	    openEmptySession: state.newSession,
+	    addSession: state.addSession.newSession
 	  };
 	}
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(MainScreen);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(MainScreen);
 
 /***/ }),
 /* 288 */
@@ -31112,18 +31115,24 @@
 
 	    var _this = _possibleConstructorReturn(this, (EmptySession.__proto__ || Object.getPrototypeOf(EmptySession)).call(this, props));
 
-	    _this.handleNameChange = function (ev) {
+	    _this.state = {
+	      name: '',
+	      location: ''
+	    };
 
-	      _this.name = ev.target.value;
+	    _this.handleNameChange = function (ev) {
+	      _this.setState({ name: ev.target.value });
 	    };
 
 	    _this.handleLocationChange = function (ev) {
-	      _this.location = ev.target.value;
+	      _this.setState({ location: ev.target.value });
 	    };
 
 	    _this.handleSubmit = function (ev) {
 	      ev.preventDefault();
-	      _this.props.handleSubmit(_this.name, _this.location);
+	      _this.props.handleSubmit(_this.state.name, _this.state.location);
+	      _this.setState({ name: '' });
+	      _this.setState({ location: '' });
 	    };
 	    return _this;
 	  }
@@ -31145,7 +31154,7 @@
 	              { htmlFor: 'name' },
 	              'Name:'
 	            ),
-	            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'name', onChange: this.handleNameChange })
+	            _react2.default.createElement('input', { type: 'text', value: this.state.name, className: 'form-control', id: 'name', onChange: this.handleNameChange })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -31155,11 +31164,11 @@
 	              { htmlFor: 'location' },
 	              'Location:'
 	            ),
-	            _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'location', onChange: this.handleLocationChange })
+	            _react2.default.createElement('input', { type: 'text', value: this.state.location, className: 'form-control', id: 'location', onChange: this.handleLocationChange })
 	          ),
 	          _react2.default.createElement(
 	            'button',
-	            { type: 'submit', className: 'btn btn-default', onSubmit: this.handleSubmit },
+	            { type: 'submit', className: 'btn btn-default' },
 	            'Submit'
 	          )
 	        )
@@ -31175,7 +31184,7 @@
 	    handleSubmit: function handleSubmit(name, location) {
 	      dispatch({
 	        type: 'ADD_SESSION',
-	        payload: { name: name, location: location }
+	        payload: { aragmatiki: { name: name, location: location }, newSession: false }
 	      });
 	    }
 	  };
@@ -31213,10 +31222,14 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// const rootReducer = combineReducers({
+	//   aragmatikes: AragmatikesReducer,
+	//   activeSession: ActiveSessionReducer,
+	//   newSession: CreateSessionReducer,
+	//   addSession: AddSessionReducer
+	// });
+
 	var rootReducer = (0, _redux.combineReducers)({
-	  aragmatikes: _reducer_aragmatikes2.default,
-	  activeSession: _reducer_active_session2.default,
-	  newSession: _reducer_create_session2.default,
 	  addSession: _reducer_add_session2.default
 	});
 
@@ -31254,10 +31267,20 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var initialState = {
-	  aragmatikes: []
-	};
+	// const initialState = {
+	//   activeSession: null,
+	//   newSession: false,
+	//   addSession: {
+	//     aragmatikes: [],
+	//   }
+	// }
 
+	var initialState = {
+	  addSession: {
+	    aragmatikes: [],
+	    newSession: false
+	  }
+	};
 	exports.default = initialState;
 
 /***/ }),
@@ -31274,7 +31297,6 @@
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
 	  var action = arguments[1];
 
-	  console.log('SESSION_SELECTED', state, action);
 	  switch (action.type) {
 	    case 'SESSION_SELECTED':
 	      var newState = Object.assign({}, state, { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes)), newSession: action.payload.newSession });
@@ -31308,16 +31330,14 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 	exports.default = function () {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
 	  var action = arguments[1];
 
+	  console.log('state:', state, 'action:', action);
 	  switch (action.type) {
 	    case 'CREATE_SESSION':
-	      var newSessionValue = action.payload.newSession;
-	      var newState = { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes)), newSession: newSessionValue };
+	      var newState = action.payload.newSession;
 	      return newState;
 	    default:
 	      return state;
@@ -31346,16 +31366,19 @@
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
 	  var action = arguments[1];
 
-	  debugger;
 	  switch (action.type) {
 	    case 'ADD_SESSION':
-	      var newState = Object.assign({}, state, { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes), [{ name: action.payload.name, location: action.payload.location }]) });
-	      return newState;
+	      debugger;
+	      if (action.payload.aragmatiki) {
+	        return Object.assign({}, state, { aragmatikes: [action.payload.aragmatiki].concat(_toConsumableArray(state.aragmatikes)),
+	          newSession: false, addSession: true });
+	      } else {
+	        return Object.assign({}, state, { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes)),
+	          newSession: true, addSession: true });
+	      }
 	    default:
 	      return state;
 	  }
-
-	  return state;
 	};
 
 /***/ }),
