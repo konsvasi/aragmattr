@@ -64,11 +64,11 @@
 
 	var _main_bar2 = _interopRequireDefault(_main_bar);
 
-	var _container = __webpack_require__(272);
+	var _container = __webpack_require__(284);
 
 	var _container2 = _interopRequireDefault(_container);
 
-	var _reducers = __webpack_require__(276);
+	var _reducers = __webpack_require__(289);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -29210,7 +29210,7 @@
 
 	var _logo2 = _interopRequireDefault(_logo);
 
-	var _add_button = __webpack_require__(271);
+	var _add_button = __webpack_require__(296);
 
 	var _add_button2 = _interopRequireDefault(_add_button);
 
@@ -29254,37 +29254,36 @@
 	exports.default = Logo;
 
 /***/ }),
-/* 271 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */
+/***/ (function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Button = function Button() {
-	  return _react2.default.createElement(
-	    "button",
-	    { onClick: create, className: "addButton btn btn-default", type: "button" },
-	    "+"
-	  );
-	};
-
-	var create = function create() {
-	  alert('New aragmatiki created');
-	};
-
-	exports.default = Button;
+	exports.selectSession = selectSession;
+	function selectSession(aragmatiki) {
+	  return {
+	    type: 'SESSION_SELECTED',
+	    payLoad: aragmatiki
+	  };
+	}
 
 /***/ }),
-/* 272 */
+/* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29303,11 +29302,11 @@
 
 	var _main_bar2 = _interopRequireDefault(_main_bar);
 
-	var _aragmatiki_list = __webpack_require__(273);
+	var _aragmatiki_list = __webpack_require__(285);
 
 	var _aragmatiki_list2 = _interopRequireDefault(_aragmatiki_list);
 
-	var _aragmatiki_content = __webpack_require__(275);
+	var _aragmatiki_content = __webpack_require__(286);
 
 	var _aragmatiki_content2 = _interopRequireDefault(_aragmatiki_content);
 
@@ -29347,7 +29346,7 @@
 	exports.default = Container;
 
 /***/ }),
-/* 273 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29364,7 +29363,7 @@
 
 	var _reactRedux = __webpack_require__(241);
 
-	var _index = __webpack_require__(274);
+	var _index = __webpack_require__(283);
 
 	var _redux = __webpack_require__(248);
 
@@ -29429,24 +29428,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Aragmatikes);
 
 /***/ }),
-/* 274 */
-/***/ (function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.selectSession = selectSession;
-	function selectSession(aragmatiki) {
-	  return {
-	    type: 'SESSION_SELECTED',
-	    payLoad: aragmatiki
-	  };
-	}
-
-/***/ }),
-/* 275 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29526,7 +29508,9 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(AragmatikiContent);
 
 /***/ }),
-/* 276 */
+/* 287 */,
+/* 288 */,
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29537,11 +29521,11 @@
 
 	var _redux = __webpack_require__(248);
 
-	var _reducer_aragmatikes = __webpack_require__(277);
+	var _reducer_aragmatikes = __webpack_require__(290);
 
 	var _reducer_aragmatikes2 = _interopRequireDefault(_reducer_aragmatikes);
 
-	var _reducer_active_session = __webpack_require__(278);
+	var _reducer_active_session = __webpack_require__(292);
 
 	var _reducer_active_session2 = _interopRequireDefault(_reducer_active_session);
 
@@ -29555,7 +29539,7 @@
 	exports.default = rootReducer;
 
 /***/ }),
-/* 277 */
+/* 290 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -29569,7 +29553,8 @@
 	};
 
 /***/ }),
-/* 278 */
+/* 291 */,
+/* 292 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -29590,6 +29575,39 @@
 
 	  return state;
 	};
+
+/***/ }),
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Button = function Button() {
+	  return _react2.default.createElement(
+	    "button",
+	    { onClick: create, className: "addButton btn btn-default", type: "button" },
+	    "+"
+	  );
+	};
+
+	var create = function create() {
+	  alert('New aragmatiki created');
+	};
+
+	exports.default = Button;
 
 /***/ })
 /******/ ]);
