@@ -58,8 +58,6 @@
 
 	var _reactRedux = __webpack_require__(241);
 
-	var _redux = __webpack_require__(248);
-
 	var _main_bar = __webpack_require__(269);
 
 	var _main_bar2 = _interopRequireDefault(_main_bar);
@@ -67,14 +65,6 @@
 	var _container = __webpack_require__(284);
 
 	var _container2 = _interopRequireDefault(_container);
-
-	var _reducers = __webpack_require__(289);
-
-	var _reducers2 = _interopRequireDefault(_reducers);
-
-	var _initialState = __webpack_require__(291);
-
-	var _initialState2 = _interopRequireDefault(_initialState);
 
 	var _configureStore = __webpack_require__(295);
 
@@ -85,8 +75,7 @@
 	var mainBar = document.getElementById('main-bar');
 	var container = document.getElementById('container');
 
-	// const store = createStore(rootReducer, initialState);
-	var store = (0, _redux.createStore)(_reducers2.default, _initialState2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+	var store = (0, _configureStore2.default)();
 
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
@@ -29300,17 +29289,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var customStyles = {
-	  content: {
-	    top: '50%',
-	    left: '50%',
-	    right: 'auto',
-	    bottom: 'auto',
-	    marginRight: '-50%',
-	    transform: 'translate(-50%, -50%)'
-	  }
-	};
-
 	var Button = function (_Component) {
 	  _inherits(Button, _Component);
 
@@ -29342,12 +29320,6 @@
 
 	  return Button;
 	}(_react.Component);
-
-	// function mapDispatchToProps(dispatch) {
-	//   return ({
-	//     createSession: () => {dispatch({type:'CREATE_SESSION', payload: {newSession: true}})}
-	//   })
-	// }
 
 	function mapDispatchToProps(dispatch) {
 	  return {
@@ -30845,10 +30817,6 @@
 
 	var _reactRedux = __webpack_require__(241);
 
-	var _index = __webpack_require__(283);
-
-	var _redux = __webpack_require__(248);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31018,10 +30986,6 @@
 
 	var _reactRedux = __webpack_require__(241);
 
-	var _redux = __webpack_require__(248);
-
-	var _redux2 = _interopRequireDefault(_redux);
-
 	var _aragmatiki_content = __webpack_require__(286);
 
 	var _aragmatiki_content2 = _interopRequireDefault(_aragmatiki_content);
@@ -31050,9 +31014,6 @@
 	  _createClass(MainScreen, [{
 	    key: 'showContent',
 	    value: function showContent() {
-	      console.log('this.props.newSession:', this.props);
-	      debugger;
-
 	      if (this.props.addSession) {
 	        return _react2.default.createElement(_empty_session2.default, null);
 	      }
@@ -31074,7 +31035,6 @@
 
 	function mapStateToProps(state) {
 	  return {
-	    openEmptySession: state.newSession,
 	    addSession: state.addSession.newSession
 	  };
 	}
@@ -31204,30 +31164,11 @@
 
 	var _redux = __webpack_require__(248);
 
-	var _reducer_aragmatikes = __webpack_require__(290);
-
-	var _reducer_aragmatikes2 = _interopRequireDefault(_reducer_aragmatikes);
-
-	var _reducer_active_session = __webpack_require__(292);
-
-	var _reducer_active_session2 = _interopRequireDefault(_reducer_active_session);
-
-	var _reducer_create_session = __webpack_require__(293);
-
-	var _reducer_create_session2 = _interopRequireDefault(_reducer_create_session);
-
 	var _reducer_add_session = __webpack_require__(294);
 
 	var _reducer_add_session2 = _interopRequireDefault(_reducer_add_session);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	// const rootReducer = combineReducers({
-	//   aragmatikes: AragmatikesReducer,
-	//   activeSession: ActiveSessionReducer,
-	//   newSession: CreateSessionReducer,
-	//   addSession: AddSessionReducer
-	// });
 
 	var rootReducer = (0, _redux.combineReducers)({
 	  addSession: _reducer_add_session2.default
@@ -31236,29 +31177,7 @@
 	exports.default = rootReducer;
 
 /***/ }),
-/* 290 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function () {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
-	  var action = arguments[1];
-
-	  return state;
-	};
-
-	var _initialState = __webpack_require__(291);
-
-	var _initialState2 = _interopRequireDefault(_initialState);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
+/* 290 */,
 /* 291 */
 /***/ (function(module, exports) {
 
@@ -31267,14 +31186,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	// const initialState = {
-	//   activeSession: null,
-	//   newSession: false,
-	//   addSession: {
-	//     aragmatikes: [],
-	//   }
-	// }
-
 	var initialState = {
 	  addSession: {
 	    aragmatikes: [],
@@ -31284,67 +31195,8 @@
 	exports.default = initialState;
 
 /***/ }),
-/* 292 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	exports.default = function () {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case 'SESSION_SELECTED':
-	      var newState = Object.assign({}, state, { aragmatikes: [].concat(_toConsumableArray(state.aragmatikes)), newSession: action.payload.newSession });
-	      return newState;
-	    default:
-	      return state;
-	  }
-	};
-
-	var _initialState = __webpack_require__(291);
-
-	var _initialState2 = _interopRequireDefault(_initialState);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-/***/ }),
-/* 293 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _initialState = __webpack_require__(291);
-
-	var _initialState2 = _interopRequireDefault(_initialState);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = function () {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialState2.default;
-	  var action = arguments[1];
-
-	  console.log('state:', state, 'action:', action);
-	  switch (action.type) {
-	    case 'CREATE_SESSION':
-	      var newState = action.payload.newSession;
-	      return newState;
-	    default:
-	      return state;
-	  }
-	};
-
-/***/ }),
+/* 292 */,
+/* 293 */,
 /* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31368,7 +31220,6 @@
 
 	  switch (action.type) {
 	    case 'ADD_SESSION':
-	      debugger;
 	      if (action.payload.aragmatiki) {
 	        return Object.assign({}, state, { aragmatikes: [action.payload.aragmatiki].concat(_toConsumableArray(state.aragmatikes)),
 	          newSession: false, addSession: true });
@@ -31398,10 +31249,14 @@
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
+	var _initialState = __webpack_require__(291);
+
+	var _initialState2 = _interopRequireDefault(_initialState);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function configureStore(initialState) {
-	  return (0, _redux.createStore)(_reducers2.default, initialState);
+	function configureStore() {
+	  return (0, _redux.createStore)(_reducers2.default, _initialState2.default);
 	}
 
 /***/ })
