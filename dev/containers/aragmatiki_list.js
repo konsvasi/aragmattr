@@ -6,7 +6,7 @@ class Aragmatikes extends Component {
     return this.props.aragmatikes.map((aragmatiki) => {
       return (
           <li className="list-group-item"
-            key={aragmatiki.name}
+            key={aragmatiki.id}
             onClick ={()=> {this.props.selectSession(aragmatiki)}}>
             {aragmatiki.name}
           </li>
@@ -30,17 +30,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    selectSession: (session) => {
-      dispatch({
-        type: 'SESSION_SELECTED',
-        payload: {
-          aragmatiki: session,
-          newSession: false
-        }
-      })
-    }
-  }
+  return ({
+    selectSession: (id) => {dispatch({type: 'SESSION_SELECTED', payload: {id: id}})}
+  })
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Aragmatikes);

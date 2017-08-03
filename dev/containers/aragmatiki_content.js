@@ -16,18 +16,33 @@ class AragmatikiContent extends Component {
       )
     }
 
-    return(
-      <div className="aragmatikiContent">
-        <h1 className="content-style">Name:{this.props.aragmatikes[0].name}</h1>
-        <h2 className="content-style">Location:{this.props.aragmatikes[0].location}</h2>
-      </div>
-    );
+    if (this.props.id !== null) {
+      const aragmatiki = this.props.aragmatikes.find(session => {
+        debugger;
+        console.log('session:', session);
+        return session.id === this.props.id.id;
+      })
+      console.log('selected aragmatiki:', aragmatiki);
+      return(
+        <div className="aragmatikiContent">
+          <h1 className="content-style">Name:{aragmatiki.name}</h1>
+          <h2 className="content-style">Location:{aragmatiki.location}</h2>
+        </div>
+      );
+    } else {
+      return(
+        <div className="aragmatikiContent">
+          <h1 className="content-style">Name:{this.props.aragmatikes[0].name}</h1>
+          <h2 className="content-style">Location:{this.props.aragmatikes[0].location}</h2>
+        </div>
+      );
+    }
   }
 }
 
 function mapStateToProps(state) {
   return {
-    aragmatiki: state.activeSession,
+    id: state.activeSession,
     aragmatikes: state.addSession.aragmatikes
   }
 }

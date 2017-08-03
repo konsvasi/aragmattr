@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import randomString from 'randomstring';
 
 class EmptySession extends Component {
   constructor(props) {
@@ -50,7 +51,7 @@ const mapDispatchToProps = (dispatch) => {
       handleSubmit: (name, location) => {
       dispatch({
         type: 'ADD_SESSION',
-        payload: {aragmatiki: { name: name, location: location}, newSession: false}
+        payload: {aragmatiki: { name: name, location: location, id: randomString.generate({length: 5, charset: 'alphanumeric'}) }, newSession: false}
       });
     }
   }
