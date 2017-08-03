@@ -6,20 +6,20 @@ class AragmatikiContent extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
-    if (!this.props.aragmatiki) {
+    if (this.props.aragmatikes.length == 0) {
       return (
         <div className="aragmatikiContent">
-              <h2 className="content-style">Select a session</h2>
+              <h2 className="content-style">Create a session</h2>
         </div>
       )
     }
 
     return(
       <div className="aragmatikiContent">
-        <h1 className="content-style">Name:{this.props.aragmatiki.name}</h1>
-        <h2 className="content-style">Location:{this.props.aragmatiki.location}</h2>
+        <h1 className="content-style">Name:{this.props.aragmatikes[0].name}</h1>
+        <h2 className="content-style">Location:{this.props.aragmatikes[0].location}</h2>
       </div>
     );
   }
@@ -27,7 +27,8 @@ class AragmatikiContent extends Component {
 
 function mapStateToProps(state) {
   return {
-    aragmatiki: state.activeSession
+    aragmatiki: state.activeSession,
+    aragmatikes: state.addSession.aragmatikes
   }
 }
 

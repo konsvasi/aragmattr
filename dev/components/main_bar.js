@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Logo from './logo';
-import Button from './add_button';
+import Button from '../containers/add_button';
 
 const MainBar = () => {
   return (

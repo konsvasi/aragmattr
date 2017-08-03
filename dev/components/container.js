@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MainBar from './main_bar';
 import Aragmatikes from '../containers/aragmatiki_list';
 import AragmatikiContent from '../containers/aragmatiki_content';
+import MainScreen from '../containers/main_screen';
 
 class Container extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Container extends Component {
       <div>
         <MainBar />
         <Aragmatikes />
-        <AragmatikiContent />
+        <MainScreen />
       </div>
     )
   }

@@ -1,9 +1,11 @@
-export default function(state = null, action) {
-  console.log('click', state, action);
+import initialState from './initialState';
+
+export default function(state = initialState, action) {
   switch(action.type) {
     case 'SESSION_SELECTED':
-      return action.payLoad;
+      const newState =  Object.assign({}, state, { aragmatikes: [...state.aragmatikes], newSession: action.payload.newSession});
+      return newState;
+    default:
+      return state
   }
-
-  return state;
 }

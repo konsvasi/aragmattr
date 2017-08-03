@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { selectSession} from '../actions/index';
-import { bindActionCreators } from 'redux';
 
 class Aragmatikes extends Component {
   renderList() {
@@ -9,7 +7,7 @@ class Aragmatikes extends Component {
       return (
           <li className="list-group-item"
             key={aragmatiki.name}
-            onClick ={()=>this.props.selectSession(aragmatiki)}>
+            onClick ={()=> {this.props.selectSession(aragmatiki)}}>
             {aragmatiki.name}
           </li>
       )
@@ -27,12 +25,22 @@ class Aragmatikes extends Component {
 
 function mapStateToProps(state) {
   return {
-    aragmatikes: state.aragmatikes
+    aragmatikes: state.addSession.aragmatikes
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({selectSession: selectSession}, dispatch);
+  return {
+    selectSession: (session) => {
+      dispatch({
+        type: 'SESSION_SELECTED',
+        payload: {
+          aragmatiki: session,
+          newSession: false
+        }
+      })
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Aragmatikes);
