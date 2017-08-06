@@ -1,9 +1,72 @@
+/*Login page styles go here */
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -100;
+}
+
+#bg video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
+}
+
+.overlay {
+  background-color: black;
+  opacity: 0.75;
+  z-index: 1;
+}
+
+#login-form {
+  width: 250px;
+  height: 250px;
+  background-color: #4ef47a;
+  opacity: 0.90;
+  border-radius: 15px;
+  position: fixed;
+  top:40%;
+  left:40%;
+  z-index: 5;
+}
+
+.input-style {
+  margin-right: 10px;
+  bottom: 10px;
+}
+
+#register {
+  font-family: 'Helvetica';
+  color: white;
+  opacity: 0.9;
+}
+
+#register_form {
+  margin-top: 35px;
+}
+
+#login-bar {
+  background-color: #3F51B5;
+}
+
+.submit-button {
+  color: #FFF;
+  background-color: #34ef60;
+}
+/*Main page style go here */
 .main-bar {
   height: 100px;
   width: 100%;
   padding: 0px;
   background-color: #3F51B5;
-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   filter: drop-shadow(0px 0px 5px #666);
 }
 
