@@ -18,7 +18,7 @@ class MainScreen extends Component {
 
   render() {
     return (
-      <div>
+      <div className="col-md-9">
         {this.showContent()}
       </div>
     )

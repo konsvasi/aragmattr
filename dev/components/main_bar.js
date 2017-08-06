@@ -4,9 +4,9 @@ import Button from '../containers/add_button';
 
 const MainBar = () => {
   return (
-    <div className="main-bar">
-      <Logo />
-      <Button />
+    <div className="main-bar row">
+      <Logo/>
+      <Button/>
     </div>
   );
 }

@@ -18,7 +18,6 @@ class AragmatikiContent extends Component {
 
     if (this.props.id !== null) {
       const aragmatiki = this.props.aragmatikes.find(session => {
-        debugger;
         console.log('session:', session);
         return session.id === this.props.id.id;
       })

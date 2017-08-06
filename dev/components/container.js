@@ -11,10 +11,12 @@ class Container extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <MainBar />
-        <Aragmatikes />
-        <MainScreen />
+        <div className="row">
+          <Aragmatikes />
+          <MainScreen />
+        </div>
       </div>
     )
   }

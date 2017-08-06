@@ -5,7 +5,7 @@ class Aragmatikes extends Component {
   renderList() {
     return this.props.aragmatikes.map((aragmatiki) => {
       return (
-          <li className="list-group-item"
+          <li className="list-group-item aragmatiki-item"
             key={aragmatiki.id}
             onClick ={()=> {this.props.selectSession(aragmatiki)}}>
             {aragmatiki.name}
@@ -16,9 +16,11 @@ class Aragmatikes extends Component {
 
   render() {
     return(
-      <ol className="aragmatikes">
-        {this.renderList()}
-      </ol>
+      <div className="col-md-3">
+        <ol className="aragmatikes list-unstyled">
+          {this.renderList()}
+        </ol>
+      </div>
     )
   }
 }

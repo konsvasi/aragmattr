@@ -12,10 +12,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   font-size: 48px;
   font-weight: bold;
   color: #FFF;
-  padding: 13px;
-  padding-top: 20px;
   opacity: 0.87;
-  margin: 0px;
   display: inline-block;
 }
 
@@ -32,6 +29,7 @@ box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   margin-top: 10px;
   float: left;
   background-color: #E8EAF6;
+  border-radius: 10px;
   width: 350px;
   height: 100vh;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -42,18 +40,34 @@ box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   font-size: 24px;
   padding-top: 20px;
   font-family: Helvetica;
+  background-color: inherit;
 }
 
 .aragmatikiContent {
   margin-top: 10px;
+  border-radius: 10px;
   background-color: #E8EAF6;
-  margin-left: 370px;
-  margin-right: 35px;
-  height: 100vh;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  height: 100vh;
 }
 
 .content-style {
   padding-left: 25px;
   padding-top: 15px;
+}
+
+form {
+  padding-top: 25px;
+}
+
+.label-style {
+  font-family: 'Helvetica';
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#submit-btn {
+  margin-top: 25px;
+  margin-right: 15px;
+  float:right;
 }

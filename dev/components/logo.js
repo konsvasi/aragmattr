@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 
 const Logo = () => {
-  return <p className="logo">Aragmattr</p>
+  return (
+    <div className="col-md-6">
+      <p className="logo">Aragmattr</p>
+    </div>
+  )
 }
 
 export default Logo;

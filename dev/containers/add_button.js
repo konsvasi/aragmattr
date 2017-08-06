@@ -11,7 +11,7 @@ class Button extends Component {
 
   render() {
     return (
-      <div>
+      <div className="col-md-6">
         <button className="addButton btn btn-default"
           onClick={()=> {this.props.createSession()}}>+</button>
       </div>

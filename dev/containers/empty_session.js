@@ -30,16 +30,20 @@ class EmptySession extends Component {
   render() {
     return (
       <div className="aragmatikiContent">
-        <form onSubmit={this.handleSubmit}>
+        <form className="form-horizontal" onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Name:</label>
-            <input type="text"  value={this.state.name} className="form-control" id="name" onChange = {this.handleNameChange}/>
+            <label className="control-label col-sm-2 label-style" htmlFor="name">Name:</label>
+            <div className="col-sm-10">
+              <input type="text" value={this.state.name} className="form-control content-style" id="name" onChange = {this.handleNameChange}/>
+            </div>
           </div>
           <div className="form-group">
-            <label htmlFor="location">Location:</label>
-            <input type="text" value={this.state.location} className="form-control" id="location" onChange = {this.handleLocationChange}/>
+            <label className="control-label col-sm-2 label-style" htmlFor="location">Location:</label>
+            <div className="col-sm-10">
+              <input type="text" value={this.state.location} className="form-control content-style" id="location" onChange = {this.handleLocationChange}/>
+            </div>
           </div>
-          <button type="submit" className="btn btn-default" >Submit</button>
+          <button id="submit-btn" type="submit" className="btn btn-default" >Submit</button>
         </form>
       </div>
     )
