@@ -27,9 +27,8 @@ app.get('/', function(req, res){
 });
 
 app.post('/', function(req, res){
-  //console.log('data', JSON.stringify(req.body));
-  console.log('username:', JSON.stringify(req.body.username), 'pwd', JSON.stringify(req.body.password));
-  var newUser = new User({username: JSON.stringify(req.body.username), password: JSON.stringify(req.body.password)});
+  console.log('username', req.body.username);
+  var newUser = new User({username: req.body.username, password: req.body.password});
   newUser.save(function(err, newUser){
     if (err) return console.error(err);
     newUser.speak();
