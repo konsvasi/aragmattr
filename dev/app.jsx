@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Router, Route, Link, hashHistory} from 'react-router';
 import { Provider } from 'react-redux';
 
-
 import MainBar from './components/main_bar';
 import Container from './components/container';
 import configureStore from './store/configureStore';
