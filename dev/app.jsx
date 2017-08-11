@@ -17,6 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={LoginPage}/>
+      <Route path="/aragmatikes" component={Container}/>
     </Router>
   </Provider>,
   container

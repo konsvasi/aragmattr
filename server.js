@@ -28,12 +28,25 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
   console.log('username', req.body.username);
+
   var newUser = new User({username: req.body.username, password: req.body.password});
   newUser.save(function(err, newUser){
-    if (err) return console.error(err);
+    if (err) return console.error('Lathos', err.message);
     newUser.speak();
   })
   res.send(req.body);
+})
+
+app.post('/login', function(req, res){
+  console.log('login:', req.body.username, req.body.password);
+  User.authenticate(req.body.username, req.body.password, function(err, user){
+    if (err) {
+      console.log('error on login', err);
+    }
+
+    //redirect to page
+    console.log('user found:', user);
+  })
 })
 
 app.get('/output/bundle.js', function(req, res){
