@@ -12,8 +12,6 @@ mongoose.Promise = global.Promise;
 mongoose.connect(uri, options);
 var db = mongoose.connection;
 
-var kostas = new User({username: 'Kostas', password: '1234'});
-console.log(kostas);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.on('open', function(){
   console.log('CONNECTED');
@@ -21,6 +19,7 @@ db.on('open', function(){
 
 
 app.use(express.static('dev'));
+
 app.use(bodyParser.json());
 app.get('/', function(req, res){
   res.sendFile(path.join(__dirname + '/index.html'));
@@ -39,13 +38,15 @@ app.post('/', function(req, res){
 
 app.post('/login', function(req, res){
   console.log('login:', req.body.username, req.body.password);
-  User.authenticate(req.body.username, req.body.password, function(err, user){
+  User.authenticate(req.body.username, req.body.password, function(err, token){
     if (err) {
       console.log('error on login', err);
+      res.status(401).json({errors: {form: err.message}});
     }
 
     //redirect to page
-    console.log('user found:', user);
+    console.log('user found:', token);
+    res.json({token});
   })
 })
 

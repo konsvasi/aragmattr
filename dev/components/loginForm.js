@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../actions/AuthActions';
 import axios from 'axios';
 import { Link } from 'react-router';
 
@@ -8,21 +11,27 @@ class LoginForm extends Component {
 
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errors: {}
     }
 
-    this.login = (ev) => {
+    this.handleSubmit = (ev) => {
       ev.preventDefault();
-      axios.post('/login', {
-        username: this.state.username,
-        password: this.state.password
-      })
-      .then((response) => {
-        console.log('login:', response);
-      })
-      .catch((error) => {
-        console.log('error:', error)
-      })
+      this.props.login(this.state).then(
+        (res) => console.log('res', res),
+        (err) => {
+          this.setState({errors: err.response.data.errors })}
+      );
+      // axios.post('/login', {
+      //   username: this.state.username,
+      //   password: this.state.password
+      // })
+      // .then((response) => {
+      //   console.log('login:', response);
+      // })
+      // .catch((error) => {
+      //   console.log('error:', error)
+      // })
 
       this.setState({username: ''});
       this.setState({password: ''});
@@ -32,7 +41,8 @@ class LoginForm extends Component {
   render() {
     return (
       <div className="col-md-6">
-        <form  onSubmit={this.login} className="form-inline">
+        <form  onSubmit={this.handleSubmit} className="form-inline">
+          { this.state.errors.form && <div className="alert alert-danger">{this.state.errors.form}</div>}
           <label className="sr-only" htmlFor="inlineFormInput">Name</label>
           <input type="text"
             required
@@ -48,6 +58,10 @@ class LoginForm extends Component {
       </div>
     )
   }
-
 }
-export default LoginForm;
+
+LoginForm.propTypes = {
+  login: React.PropTypes.func.isRequired
+}
+
+export default connect(undefined, { login })(LoginForm);

@@ -11,7 +11,7 @@ class RegisterForm extends Component {
       confPwd: ''
     }
 
-    this.handleSubmit = (ev) => {
+    this.handleSubmit = (ev) => {a
       ev.preventDefault();
       console.log('state on submit:', this.state);
       if (this.state.password !== this.state.confPwd) {
