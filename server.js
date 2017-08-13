@@ -3,7 +3,9 @@ var app = express();
 var path = require('path');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var validator = require('validator');
 var User = require('./dev/Models/UserModel');
+var isEmpty = require('lodash/isEmpty');
 
 var uri = 'mongodb://admin:aragmattr2017@ds157500.mlab.com:57500/aragmattrbase';
 var options = { useMongoClient: true};
@@ -25,15 +27,49 @@ app.get('/', function(req, res){
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-app.post('/', function(req, res){
-  console.log('username', req.body.username);
+function validateInput(data) {
+  var errors = {};
 
-  var newUser = new User({username: req.body.username, password: req.body.password});
-  newUser.save(function(err, newUser){
-    if (err) return console.error('Lathos', err.message);
-    newUser.speak();
-  })
-  res.send(req.body);
+  if (validator.isEmpty(data.username)) {
+    errors.username = 'Field is required';
+  }
+
+  if (validator.isEmpty(data.password)) {
+    errors.password = 'Field is required';
+  }
+
+  if (validator.isEmpty(data.confPwd)) {
+    errors.confPwd = 'Field is required';
+  }
+
+  if(!validator.equals(data.password, data.confPwd)) {
+    errors.pwdDontMatch = "Passwords don't match";
+  }
+
+  return {
+    errors: errors,
+    isValid: isEmpty(errors)
+  }
+}
+
+app.post('/register', function(req, res){
+  const input = validateInput(req.body);
+  const errors = input.errors;
+  const isValid = input.isValid;
+
+  if(isValid) {
+    var newUser = new User({username: req.body.username, password: req.body.password});
+    newUser.save()
+      .then(function(user) {
+        user.speak();
+        res.json({success: true })
+      })
+      .catch(function(err){
+        res.status(500).json({error: err})
+      })
+  } else {
+    res.status(400).json(errors);
+  }
 })
 
 app.post('/login', function(req, res){

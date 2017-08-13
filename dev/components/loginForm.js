@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../actions/AuthActions';
 import axios from 'axios';
-import { Link } from 'react-router';
 
 class LoginForm extends Component {
   constructor(props) {
