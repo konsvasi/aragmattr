@@ -15,6 +15,10 @@ var config = {
       include: DEV,
       loader: "babel",
     }]
+  },
+  node: {
+    net: 'empty',
+    dns: 'empty'
   }
 };
 
