@@ -9,7 +9,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log('props in login.js', this.props);
     return (
       <div className="container-fluid">
         <div className="row" id="login-bar">
