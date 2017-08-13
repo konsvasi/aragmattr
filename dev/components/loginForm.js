@@ -18,20 +18,10 @@ class LoginForm extends Component {
     this.handleSubmit = (ev) => {
       ev.preventDefault();
       this.props.login(this.state).then(
-        (res) => console.log('res', res),
+        (res) => this.context.router.push('/aragmatikes'),
         (err) => {
           this.setState({errors: err.response.data.errors })}
       );
-      // axios.post('/login', {
-      //   username: this.state.username,
-      //   password: this.state.password
-      // })
-      // .then((response) => {
-      //   console.log('login:', response);
-      // })
-      // .catch((error) => {
-      //   console.log('error:', error)
-      // })
 
       this.setState({username: ''});
       this.setState({password: ''});
@@ -62,6 +52,10 @@ class LoginForm extends Component {
 
 LoginForm.propTypes = {
   login: React.PropTypes.func.isRequired
+}
+
+LoginForm.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default connect(undefined, { login })(LoginForm);
