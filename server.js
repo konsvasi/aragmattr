@@ -27,6 +27,10 @@ app.get('/', function(req, res){
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+app.post('/logout', function(req, res) {
+  res.json({success: true})
+})
+
 function validateInput(data) {
   var errors = {};
 

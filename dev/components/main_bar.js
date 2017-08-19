@@ -11,7 +11,8 @@ class MainBar extends Component {
     this.logout = (e) => {
       e.preventDefault();
       this.props.logout().then(
-        (res) => this.context.router.push('/')
+        (res) => this.context.router.push('/'),
+        (err) => console.log('Error', err)
       );
     }
   }

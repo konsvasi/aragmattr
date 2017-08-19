@@ -30,6 +30,6 @@ export function logout() {
     localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
-    return axios.post('/');
+    return axios.post('/logout');
   }
 }
